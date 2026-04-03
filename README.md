@@ -59,7 +59,7 @@ Time passed quickly, but step by step, the puzzle began to make sense. Working t
 
 As the sun slowly set behind the Eiffel Tower, casting a warm golden light over the city, you realized that this journey was more than just a vacation. It was about challenges, teamwork, and friendship.
 
-Pack your bags and take the Paris metro to Paris Charles de Gaulle Airport!
+Pack your bags and take the Paris metro to Charles de Gaulle Airport!
 
 And deep down, you knew one thing for sure: the adventure had only just begun!
 
