@@ -29,51 +29,41 @@ After an academic year full of exams, assignments, and projects, they decided to
 
 In order to enjoy the landscapes and atmosphere of each place without worries, they need your help. So, from now on, throughout the journey, the two friends will become Elisa (Eli) and Eduard (Edi) for you, and you will be their traveling partner on this European adventure.
 
-Their first destination was Paris.
-
-As the plane slowly descended, Eli pressed her face against the window, fascinated by the glowing city lights, while Edi was already thinking ahead, planning routes and schedules.
+Their first destination was Paris. As the plane slowly descended, Eli pressed her face against the window, fascinated by the glowing city lights, while Edi was already thinking ahead, planning routes and schedules.
 
 “First stop: the Eiffel Tower. Second stop: food,” Edi said with a confident smile.
 
-“Third stop: somehow solving the assembly challenge waiting for us,” Eli added, laughing.
+“Third stop: somehow solving the assembly challenge waiting for us,” Eli added, laughing. ;)
 
 From that moment, you realized this trip would be anything but ordinary.
 
 The next morning, after enjoying fresh croissants and hot coffee at a small, cozy café, the three of you headed toward the Eiffel Tower. The streets were full of life — musicians playing on the sidewalks, artists painting, and tourists exploring every corner.
 
-Everything felt perfect… until Edi’s phone suddenly buzzed.
+Everything felt perfect… until Edi’s phone suddenly buzzed. He froze for a second. “I think it’s time.” Eli leaned closer as he opened the message. You read it together:
 
-He froze for a second. “I think it’s time.”
-
-Eli leaned closer as he opened the message. You read it together:
-
-“Welcome to Paris. Your challenge: decode the hidden message using bitwise operations. Only then will you unlock your next destination.”
+“Welcome to Paris! Your challenge: decode the hidden message using bitwise operations. Only then will you unlock your next destination.”
 
 You couldn’t help but smile. “Of course it wouldn’t be that easy.”
 
 The three of you found a quiet place in a nearby park. Edi opened his laptop, Eli started writing ideas in her notebook, and you joined them, ready to help. At first, the sequence of numbers seemed completely random.
 
-“Maybe we should try XOR operations,” Eli suggested thoughtfully.
+- “Maybe we should try XOR operations,” Eli suggested thoughtfully.
 
-“Or bit shifting,” you added.
+- “Or bit shifting,” you added.
 
-Time passed quickly, but step by step, the puzzle began to make sense. Working together, combining your ideas, you finally reached a solution. With a deep breath, Edi pressed “run.”
+Time passed quickly, but step by step, the puzzle began to make sense. Working together, combining your ideas, you finally reached a solution. With a deep breath, Edi pressed “run.” For a moment, nothing happened. Then, a new message appeared on the screen:
 
-For a moment, nothing happened.
+“Congratulations. Next destination: French Riviera.”
 
-Then, a new message appeared on the screen:
+- Eli jumped up excitedly. “We did it!”
 
-“Congratulations. Next destination: Rome.”
-
-Eli jumped up excitedly. “We did it!”
-
-Edi smiled, closing his laptop. “And this is just the beginning.”
+- Edi smiled, closing his laptop. “And this is just the beginning.”
 
 As the sun slowly set behind the Eiffel Tower, casting a warm golden light over the city, you realized that this journey was more than just a vacation. It was about challenges, teamwork, and friendship.
 
-And deep down, you knew one thing for sure:
+Pack your bags and take the Paris metro to Paris Charles de Gaulle Airport!
 
-The adventure had only just begun.
+And deep down, you knew one thing for sure: the adventure had only just begun!
 
 ---
 ## Task 1 - Numbers (15p)
