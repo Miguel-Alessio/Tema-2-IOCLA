@@ -33,7 +33,7 @@ Their first destination was Paris. As the plane slowly descended, Eli pressed he
 
 “First stop: the Eiffel Tower. Second stop: food,” Edi said with a confident smile.
 
-“Third stop: somehow solving the assembly challenge waiting for us,” Eli added, laughing. ;)
+“Third stop: somehow solving the assembly challenge waiting for us,” Eli added, laughing. 😅
 
 From that moment, you realized this trip would be anything but ordinary.
 
