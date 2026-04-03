@@ -263,6 +263,9 @@ The function must be completed in the `base64.asm` file.
 
 ## Task 4 - Sudoku (20p)
 
+<div align="center">
+    <img title="IDS" alt="IDS" src="./src/images/plane.png" width="700" height="1500">
+</div>
 
 ### The Story
 
