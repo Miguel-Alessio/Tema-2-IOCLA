@@ -176,27 +176,12 @@ After performing the repairs, return the modified array to the caller and also c
 
 After their heroic rescue of Ferrari's telemetry system in Monaco, Eli and Edi board a flight to Frankfurt, the financial heart of Europe. They plan to relax in the famous Palmengarten gardens, but fate has other plans.
 
-As they exit the airport, Edi's phone rings. It's Klara, a friend from university who now works as a security engineer at Deutsche Bank. Her voice is trembling: "The signal processing system for our armored truck fleet has been infected. A malware called 'Phantom Driver' is injecting fake driver profiles into our arrays. Our routing algorithms can't distinguish real drivers from ghosts, and we're losing millions in delayed deliveries!"
+As they exit the airport, Eli's phone rings. It's Kaan, a friend from university who now works as a security engineer at Deutsche Bank. His voice is trembling: "The signal processing system for our armored truck fleet has been infected. A malware called 'Phantom Driver' is injecting fake driver profiles into our arrays. Our routing algorithms can't distinguish real drivers from ghosts, and we're losing millions in delayed deliveries!"
 
 <div align="center">
     <img title="IDS" alt="IDS" src="./src/images/frankfurt.jpeg" width="700" height="1000">
 </div>
 
-There are two structures used for this task, which are both packed:
-
-```c
-    struct date {
-        uint8_t day;
-        uint8_t month;
-        uint16_t year;
-    };
-
-    struct event {
-        char name[31];
-        uint8_t valid;
-        struct date date;
-    };
-```
 
 ### Subtask 1
 
