@@ -15,7 +15,7 @@
 Following the first task, Eli and Edi — our freshman students — returned with new challenges for you. In their mission to escape Instagram’s endless scroll, they begun implementing a much more powerful algorithm that will revolutionize the world. In building this top-secret algorithm, Eli is looking for help with implementing certain parts she can’t handle right now and Edi want to optimize Eli's work!
 
 <div align="center">
-    <img title="IDS" alt="IDS" src="./src/images/intro.png" width="300" height="450">
+    <img title="IDS" alt="IDS" src="./src/images/intro.png" width="700" height="1500">
 </div>
 
 **Eli advises you to complete the assignment on the PCLP2 virtual machine.**
