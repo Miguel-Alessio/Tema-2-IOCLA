@@ -70,18 +70,20 @@ And deep down, you knew one thing for sure: the adventure had only just begun!
 </div>
 
 ---
-## Task 1 - Numbers (15p)
+## Task 1 - Monaco Grand Prix (20p)
 <br>
 
 To be able to implement the revolutionary algorithm, Alex needs to get rid of certain numbers that could stand in his way. Therefore, we divide task 1 into two parts/subtasks as follows:
 
-### Subtask 1 - Odd numbers
+### Subtask 1 - Odd numbers (5p)
 
 Posts with odd IDs are considered brainrot, so in this subtask, you need to remove the odd numbers from a list of numbers provided as a parameter. The numbers in the list represent the IDs of certain Instagram posts.
 
-### Subtask 2 - Power-numbers
+### Subtask 2 - Power-numbers (5p)
 
 Once the odd numbers have been removed, Alex asks us to also eliminate the numbers in the list that are powers of 2. As a result, the posts with those IDs will disappear after removing the numbers from the list, making it easier for Alex to implement his algorithm.
+
+### Subtask 3 - Odd numbers (10p)
 
 <br>
 It is important to note that your implementation should not modify the original list, but instead store the numbers that meet the conditions of the two subtasks in a separate list. Additionally, the subtasks are not independent. They serve merely as a formal way to divide task 1 into two parts, but essentially they form a single function. Implementing subtask 1 without subtask 2 will result in receiving only half of the total points for the task.
@@ -105,7 +107,7 @@ The function must be completed in the `remove_numbers.asm` file.
 
 <br>
 
-## Task 2 - Events (30p)
+## Task 2 - Events (25p)
 <br>
 
 To manage his events without using Instagram, Alex decided to automate the
@@ -312,7 +314,7 @@ The second line are the results of `check_column` and the third of `check_box`.
 
 ## Coding Style & README (10p)
 
-To be able to use your solutions in the implementation of the secret algorithm, Alex needs well-structured and readable assembly code that follows a few good practice rules:
+To be able to use your solutions in the implementation of the secret algorithm, Eli needs well-structured and readable assembly code that follows a few good practice rules:
 
 - writing readable code
 - consistent indentation (the recommendation is to place labels at the beginning of the line and indent instructions with one tab)
@@ -320,7 +322,7 @@ To be able to use your solutions in the implementation of the secret algorithm, 
 - including **relevant and necessary** comments in the code
 - writing code lines (or README) with a maximum of 80–100 characters
 
-You will also need to include a brief explanation of the solution for each task in a README file.
+You will also need to include a brief explanation of the solution for each task in a README file, this is a requirment from Edi.
 
 **The score for coding style and README is not included in the checker and will be awarded during evaluation.**
 
@@ -357,7 +359,10 @@ To keep the outputs, add the `--no_clean` argument when running the checker.
 
 ---
 
-**Alex thanks you for your help and looks forward to seeing you for Assignment 3 as well !!!**
+**Eli and Edi thanks you for your help and looks forward to seeing you for Assignment 3 from PCLP2 as well!!**
+<div align="center">
+    <img title="IDS" alt="IDS" src="./src/images/beach.png" width="1000" height="2000">
+</div>
 
 <div align="center">
     <img title="IDS" alt="IDS" src="./src/images/happyAlex.png" width="400" height="400">
