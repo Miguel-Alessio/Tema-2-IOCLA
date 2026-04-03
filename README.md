@@ -272,7 +272,6 @@ What he would usually do is check out [his favourite sudoku youtuber](https://ww
 There is one problem though: he wants to be 100% sure he didn't make any mistakes.
 Help him out by making a small checker that tells him which rows, columns, or boxes are wrong (if any).
 
---
 
 ## Problem Statement
 You are given a 2D array of numbers. The array's size will either be 4x4, 9x9 or 16x16.
@@ -298,9 +297,8 @@ First, let's recap the rules of sudoku:
     <img title="IDS" alt="IDS" src="./src/images/sudoku.png" width="500" height="450">
 </div>
 
---
 
-## Subtask 1 -- Verify a row
+## Subtask 1 - Verify a row
 Being given the array, its size and a certain row, verify if the row respects Sudoku's rule.
 
 **Input**
@@ -313,7 +311,7 @@ Being given the array, its size and a certain row, verify if the row respects Su
 
 ---
 
-## Subtask 2 -- Verify a column
+## Subtask 2 - Verify a column
 Being given the array, its size and a certain column, verify if the column respects Sudoku's rule.
 
 **Input**
@@ -326,7 +324,7 @@ Being given the array, its size and a certain column, verify if the column respe
 
 ---
 
-## Subtask 3 -- Verify a box
+## Subtask 3 - Verify a box
 Being given the array, its size and a certain box, verify if the box respects Sudoku's rule.
 
 **Input**
