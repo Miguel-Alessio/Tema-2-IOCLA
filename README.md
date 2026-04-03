@@ -363,7 +363,3 @@ To keep the outputs, add the `--no_clean` argument when running the checker.
 <div align="center">
     <img title="IDS" alt="IDS" src="./src/images/beach.png" width="1000" height="2000">
 </div>
-
-<div align="center">
-    <img title="IDS" alt="IDS" src="./src/images/happyAlex.png" width="400" height="400">
-</div>
