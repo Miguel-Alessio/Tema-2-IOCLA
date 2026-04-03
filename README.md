@@ -1,4 +1,4 @@
-# Homework 2 - Debugging with Alex
+# Homework 2 - Coding Across Europe: Eli and Edi’s Adventure
 
 **Authors**
 - Kaan Nasurla
@@ -11,15 +11,15 @@
 
 ---
 
-#### ALEX IS BACK!
-Following the first task, Alex — our modern TikTok brainrot specialist — has returned with new challenges for you. In his mission to escape Instagram’s endless scroll, he has begun implementing a much more powerful algorithm that will revolutionize the world. In building this top-secret algorithm, Alex is looking for help with implementing certain parts he can’t handle right now.
+#### Eli & Edi are back!
+Following the first task, Eli and Edi — our freshman students — returned with new challenges for you. In their mission to escape Instagram’s endless scroll, they begun implementing a much more powerful algorithm that will revolutionize the world. In building this top-secret algorithm, Eli is looking for help with implementing certain parts she can’t handle right now and Edi want to optimize Eli's work!
 
 <div align="center">
     <img title="IDS" alt="IDS" src="./src/images/img1.png" width="300" height="450">
 </div>
 
-**Alex advises you to complete the assignment on the PCLP2 / IOCLA virtual machine.**
-**If you're working on a different system (WSL, native Linux), he advises you to also test your solution on the PCLP2 VM.**
+**Eli advises you to complete the assignment on the PCLP2 virtual machine.**
+**If you're working on a different system (WSL, native Linux), Edi advises you to also test your solution on the PCLP2 virtual machine.**
 
 ---
 
