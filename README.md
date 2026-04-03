@@ -87,6 +87,11 @@ Due to a sensor malfunction, some cars have corrupted data, and their lap times 
 
 Eli and Edi immediately think of you, their programming partner. They know you can write the fast assembly code needed to traverse the arrays, identify errors, and fix the corrupted values – all in the blink of an eye, just like the Formula 1 cars speeding around the circuit!
 
+
+<div align="center">
+    <img title="IDS" alt="IDS" src="./src/images/monaco.png" width="1000" height="1900">
+</div>
+
 ---
 
 ## Problem Statement
