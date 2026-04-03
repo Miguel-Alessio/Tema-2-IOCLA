@@ -179,7 +179,7 @@ After their heroic rescue of Ferrari's telemetry system in Monaco, Eli and Edi b
 As they exit the airport, Edi's phone rings. It's Klara, a friend from university who now works as a security engineer at Deutsche Bank. Her voice is trembling: "The signal processing system for our armored truck fleet has been infected. A malware called 'Phantom Driver' is injecting fake driver profiles into our arrays. Our routing algorithms can't distinguish real drivers from ghosts, and we're losing millions in delayed deliveries!"
 
 <div align="center">
-    <img title="IDS" alt="IDS" src="./src/images/frankfurt.jpeg" width="1000" height="1900">
+    <img title="IDS" alt="IDS" src="./src/images/frankfurt.jpeg" width="700" height="1000">
 </div>
 
 There are two structures used for this task, which are both packed:
@@ -332,10 +332,6 @@ The function must be completed in the `base64.asm` file.
 
 ## Task 4 - Sudoku (20p)
 
-<div align="center">
-    <img title="IDS" alt="IDS" src="./src/images/plane.png" width="700" height="1500">
-</div>
-
 ### The Story
 
 Eli and Edi have just boarded their next flight and find themselved a bit bored. What is there to do on long and monotone flight? Luckily, Eli comes up with a nice way of passing time: playing Sudoku!
@@ -343,6 +339,10 @@ Eli and Edi have just boarded their next flight and find themselved a bit bored.
 What he would usually do is check out [his favourite sudoku youtuber](https://www.youtube.com/channel/UCC-UOdK8-mIjxBQm_ot1T-Q) and choose a sudoku from there, but today he wanted to take a break from all the technology and go old-school: Pen and Paper.
 There is one problem though: he wants to be 100% sure he didn't make any mistakes.
 Help him out by making a small checker that tells him which rows, columns, or boxes are wrong (if any).
+
+<div align="center">
+    <img title="IDS" alt="IDS" src="./src/images/plane.png" width="700" height="1500">
+</div>
 
 
 ## Problem Statement
