@@ -69,41 +69,102 @@ And deep down, you knew one thing for sure: the adventure had only just begun!
 
 ---
 ## Task 1 - Monaco Grand Prix (20p)
-<br>
 
-To be able to implement the revolutionary algorithm, Alex needs to get rid of certain numbers that could stand in his way. Therefore, we divide task 1 into two parts/subtasks as follows:
 
-### Subtask 1 - Odd numbers (5p)
+### The Story
 
-Posts with odd IDs are considered brainrot, so in this subtask, you need to remove the odd numbers from a list of numbers provided as a parameter. The numbers in the list represent the IDs of certain Instagram posts.
+Eli and Edi have just arrived in Monte Carlo, the heart of luxury and speed. It's Formula 1 Grand Prix weekend, and the atmosphere is electrifying. While taking Instagram-worthy photos of each other along the famous harbor, they notice a distressed Ferrari engineer staring at a dead screen.
 
-### Subtask 2 - Power-numbers (5p)
+The team's telemetry system has crashed exactly when they needed real-time calculations for race strategy. Without live data, they cannot optimize tire degradation or fuel consumption. The former programmer left two weeks ago, and no one understands the legacy assembly code that powers the low-level telemetry processing.
 
-Once the odd numbers have been removed, Alex asks us to also eliminate the numbers in the list that are powers of 2. As a result, the posts with those IDs will disappear after removing the numbers from the list, making it easier for Alex to implement his algorithm.
+Spotting Eli's and Edi's laptops in their backpacks, the engineer approaches them with a desperate plea: "You look like you know computers! We have 10 minutes before the next pit window. Please help us fix this data!"
 
-### Subtask 3 - Odd numbers (10p)
+The engineer explains that the telemetry system stores car performance data in two parallel arrays:
+- One array contains lap times (in seconds)
+- One array contains error flags (1 = corrupted, 0 = OK)
 
-<br>
-It is important to note that your implementation should not modify the original list, but instead store the numbers that meet the conditions of the two subtasks in a separate list. Additionally, the subtasks are not independent. They serve merely as a formal way to divide task 1 into two parts, but essentially they form a single function. Implementing subtask 1 without subtask 2 will result in receiving only half of the total points for the task.
+Due to a sensor malfunction, some cars have corrupted data, and their lap times need to be repaired before the strategy algorithm can run.
 
-<br>
-The function that Alex needs to implement has the following header:
+Eli and Edi immediately think of you, their programming partner. They know you can write the fast assembly code needed to traverse the arrays, identify errors, and fix the corrupted values – all in the blink of an eye, just like the Formula 1 cars speeding around the circuit!
 
-```c
-void remove_numbers(int *a, int n, int *target, int *ptr_len);
-```
+---
 
-**The first argument** (`a`) is a list of 32-bit numbers.
+## Problem Statement
 
-**The second argument** (`n`) represents the number of elements in the original list.
+You are given two parallel arrays:
+- `drivers_in_time[]` – array of lap times (unsigned integers, 4 bytes each)
+- `errors[]` – array of error flags (char/byte, 1 byte each, 0 = OK, 1 = corrupted)
 
-**The third argument** (`target`) represents the memory address where the function should write the result after removing the unwanted numbers. Thus, after completing the two subtasks, `target` will contain the new list with only the numbers accepted by Alex.
+Both arrays have the same length (`num_drivers`).
 
-**The fourth argument** (`ptr_len`) represents the memory address where the function must write the number of elements in the newly created list.
+Your task is to repair the corrupted data, generate the fixed lap times in an output array, and return statistics about the errors found.
 
-The function must be completed in the `remove_numbers.asm` file.
+---
 
-<br>
+## Subtask 1 – Counting Errors
+
+Traverse the entire array and count how many cars have the error flag set to 1.
+
+**Input:**
+- `RDI` = address of errors array (pointer to first byte)
+- `RSI` = number of drivers (array length)
+
+**Output:**
+- `RAX` = total number of drivers with error flag = 1
+---
+
+## Subtask 2 – Modify the Array – Fix Corrupted Lap
+
+After counting the errors, generate the fixed lap times in the output array according to these rules:
+
+- If a driver has `error == 0`, copy its `time` unchanged to the output array..
+- If a driver has `error == 1`, repair its `time` field using the following logic:
+  - If the corrupted driver has **both** a previous and a next driver in the array → set its time to the **average** of the previous driver's time and the next driver's time (integer division, round down).
+  - If the corrupted driver is the **first** element (no previous driver) → set its time equal to the **next** driver's time.
+  - If the corrupted driver is the **last** element (no next driver) → set its time equal to the **previous** driver's time.
+
+**Important:** When computing the fix for a corrupted driver, use the original (input) values from the neighbors in drivers_in_time, not the values that might have already been written to drivers_out_time.
+
+**Input:**
+- `RDI` = address of input lap times array (unsigned int, 4 bytes each)
+- `RSI` = address of errors array (char, 1 byte each)
+- `RDX` = number of drivers
+- `RCX` = address of output lap times array (where to write fixed times)
+- `R8` = address of integer where to store the error count
+
+**Output:**
+- `drivers_out_time` array is filled with fixed lap times
+- `*error_count` (at address R8) is set to number of errors found
+- No return value in RAX (void function)
+
+
+---
+
+## Subtask 3 – Return the Fixed Array and Verification
+
+After performing the repairs, return the modified array to the caller and also compute a simple **checksum** of all lap times (sum of all `time` fields) after repair.
+
+**Input:**
+- `RDI` = address of input lap times array
+- `RSI` = address of errors array
+- `RDX` = number of drivers
+- `RCX` = address of output lap times array
+- `R8` = address of integer where to store the error count
+
+**Output:**
+- `RAX` = checksum (sum of all `time` fields in ` drivers_out_time` after repair)
+- `*error_count` (at address R8) = number of errors fixed
+- `drivers_out_time` array is filled with fixed lap times
+
+---
+
+## Constraints
+
+- Array length: 1 ≤ `num_drivers` ≤ 10,000
+- Lap times: 60 ≤ `time` ≤ 200 (seconds)
+- Error flag: 0 or 1
+
+---
 
 ## Task 2 - Events (25p)
 <br>
