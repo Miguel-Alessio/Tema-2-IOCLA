@@ -65,6 +65,10 @@ Pack your bags and take the Paris metro to Paris Charles de Gaulle Airport!
 
 And deep down, you knew one thing for sure: the adventure had only just begun!
 
+<div align="center">
+    <img title="IDS" alt="IDS" src="./src/images/intro.png" width="1000" height="1900">
+</div>
+
 ---
 ## Task 1 - Numbers (15p)
 <br>
