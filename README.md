@@ -278,7 +278,6 @@ You are given an array of structs of type ticket with the following layout:
 | 38     | 2    | bag_weight             | 25           |
 | 40     | 1    | delayMinutes           | 10           |
 | 41     | 1    | delayHours             | 2            |
-|-------------------------------------------------------|
 
 The next subtasks will tests your ability to work with arrays of structs in asm. You are expected to write your own structs following this layour.
 
