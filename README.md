@@ -240,7 +240,6 @@ For the second subtask will be used the same array given as input in the first s
 
 ## Task 3 - The London Airport Challenge (25p)
 <br>
-
 ### The Story
 
 After their success in Frankfurt, Eli, Edi, and you flew to London. The city welcomed you with its characteristic fog and the iconic sound of a double-decker bus passing by Big Ben. You had plane tickets for the journey home, but there was a problem: all flights had massive delays due to a storm in Northern Europe. The airline needed your help.
@@ -256,6 +255,10 @@ Finally, you needed to find the best ticket for a given destination. You sorted 
 "All done!" Eli said with a smile.
 
 The agent thanked you warmly. As you left the airport, the London fog began to lift, revealing a beautiful sunset over the city. Another challenge completed, another city conquered. Your European adventure continued, one assembly task at a time. ✈️
+
+<div align="center">
+    <img title="IDS" alt="IDS" src="./src/images/airport.png" width="1000" height="1900">
+</div>
 
 ---
 
