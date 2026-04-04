@@ -173,6 +173,7 @@ After performing the repairs, return the modified array to the caller and also c
 
 ## Task 2 - Frankfurt: Phantom Driver Cyber Attack (25p)
 <br>
+### The Story
 
 After their heroic rescue of Ferrari's telemetry system in Monaco, Eli and Edi board a flight to Frankfurt, the financial heart of Europe. They plan to relax in the famous Palmengarten gardens, but fate has other plans.
 
@@ -237,81 +238,61 @@ For the second subtask will be used the same array given as input in the first s
 <br>
 
 
-## Task 3 - Base64 (25p)
+## Task 3 - The London Airport Challenge (25p)
 <br>
 
-After days and days of trying, Alex realizes there's still one more obstacle to overcome before completing the algorithm. During development, he notices that certain byte strings can be easily corrupted, so he wants to eliminate any risk by ensuring that all information is transmitted in an encrypted form. For this encryption, he chooses a well-known algorithm that is both simple to use and efficient. After much research, he decides on the Base64 encoding algorithm. Below, we’ll briefly describe the algorithm for a better understanding of the task.
+### The Story
 
+After their success in Frankfurt, Eli, Edi, and you flew to London. The city welcomed you with its characteristic fog and the iconic sound of a double-decker bus passing by Big Ben. You had plane tickets for the journey home, but there was a problem: all flights had massive delays due to a storm in Northern Europe. The airline needed your help.
 
-#### Base64 algorithm :
+"Welcome to Heathrow Airport!" the agent at the desk said. "We need your help with three tasks related to the plane tickets."
+
+First, you had to apply the delays to every ticket. For each flight, you added the delay minutes to both departure and arrival times. If minutes exceeded 59, you carried over to hours. If hours exceeded 23, you carried over to days. Soon, every flight showed the correct new schedule.
+
+Second, the airline wanted to filter passengers with unsuitable luggage. Only travelers whose bags weighed enough would keep their tickets. You copied only the valid tickets into a new array, leaving behind those with bags that were too light.
+
+Finally, you needed to find the best ticket for a given destination. You sorted all tickets by arrival time — first by day, then by hour, then by minute. If two tickets arrived at the same time, the one with the heavier luggage was considered better. Then you searched for the destination and returned the best option.
+
+"All done!" Eli said with a smile.
+
+The agent thanked you warmly. As you left the airport, the London fog began to lift, revealing a beautiful sunset over the city. Another challenge completed, another city conquered. Your European adventure continued, one assembly task at a time. ✈️
+
+---
+
+## Subtask 1 – Apply delays
+
+#### Context
+
+Due to the storm in Northern Europe, all flights have experienced delays. Each plane ticket contains delayMinutes and delayHours fields indicating the delay for that specific flight. You need to update the departure and arrival times for every ticket.
+
+**Requirement:** Implement the apply_delay function that receives an array of tickets and their count, and adds the delay to each ticket.
 First, we will "split" the string to be transformed into groups of 3 bytes, since the following algorithm operates on 3-byte groups.
-<br>
-Let's assume we have the following 3-byte array:
-<br>
-```bash
-    [0x4D, 0x61, 0x6E] => ASCII : Man
-```
-To start, we convert each byte into binary, resulting in the following array:
-<br>
-```bash
-    [01001101, 01100001, 01101110]
-```
-<br>
-We will concatenate the 3 elements of the array, and then we will get a 24-bit grouping that we will divide into 4 subgroups of 6 bits. This gives the following grouping: 
-<br>
 
-```bash
-    010011 010110 000101 101110
-```
-<br>
 
-Once we have the 4 groups, we convert each group to decimal :
-<br>
-
-```bash
-    19, 22, 5, 46
-```
-<br>
-
-At this point, we need to look at the Base64 table which will tell us which character we transform each number into. This leads to the following conclusion: 
-<br>
-```bash
-    19  -> T  
-    22  -> W  
-    5  -> F  
-    46  -> u
-```
-<br>
-
-So the result of Base64 encoding is the string `TWFu`.
-<br>
-
-You will have to implement the Base64 encoding algorithm for an array that is sent to you as a parameter, the function you have to implement has the following header:
+You will have to implement the delay algorithm, the function you have to implement has the following header:
 <br>
 ```c
-    void base64(char *a, int n, char *target, int *ptr_len);
+        void apply_delay(struct ticket* tickets, int nrTickets);
 ```
 <br>
 
--> **The first argument** is the string on which to apply the encoding algorithm
+-> RDI = address of the tickets array (struct ticket* tickets)
+
 <br>
 
--> **The second argument** is the length of the initial string
+-> RSI = number of tickets (int nrTickets
 <br>
 
--> **The third argument** is the memory address where you will put the new encoded string
-<br>
-
--> **The last argument** represents the memory address where we will store the length of the new encrypted string.
-<br>
-
-The function must be completed in the `base64.asm` file.
-
-> Useful link for Base64 Table and for a better understanding of the algorithm : <br>
-> https://en.m.wikipedia.org/wiki/Base64
+The function must be completed in the `subtask1.asm` file.
 
 > **Other details** <br>
-> It is important to note that we will only have to encode arrays with a number of bytes that is a multiple of 3, in order to remove edge-cases.
+> Use the structures defined in the skeleton (struc date and struc ticket).
+
+> The size of a ticket is ticket_size (42 bytes).
+
+> The delayMinutes and delayHours fields are located at the end of the structure.
+
+> If nrTickets is 0, the function does nothing.
 
 <br>
 
