@@ -297,7 +297,102 @@ The function must be completed in the `subtask1.asm` file.
 
 > If nrTickets is 0, the function does nothing.
 
+---
+
+## Subtask 2 – Filtering Tickets by Luggage Weight
+
+#### Context
+
+The airline wants to keep only passengers who have sufficiently heavy checked luggage (probably because those with very light bags have canceled their flights). You need to copy into a new array only the tickets that meet the minimum weight requirement.
+
+**Requirement:** Implement the filter_tickets function that receives the original tickets array, a destination array, the number of tickets (passed by pointer), and the minimum luggage weight. The function will copy to the destination array only the tickets with bag_weight >= travelersBagWeight and update the ticket count.
+
+
+The function you have to implement has the following header:
 <br>
+```c
+        void filter_tickets(struct ticket* origTickets, struct ticket* destTickets, int* nrTickets, int travelersBagWeight);
+<br>
+
+-> RDI = address of the original tickets array (struct ticket* origTickets)
+<br>
+
+-> RSI = address of the destination array (struct ticket* destTickets)
+<br>
+
+-> RDX = address of the integer containing the number of tickets (int* nrTickets)
+<br>
+
+-> RCX = minimum luggage weight (int travelersBagWeight)
+
+
+The function must be completed in the `subtask2.asm` file.
+
+> **Rules** <br>
+> Traverse the original array from beginning to end.
+
+> For each ticket, check if bag_weight >= travelersBagWeight.
+
+> At the end, update the value at address nrTickets with the new count of filtered tickets.
+
+---
+
+## Subtask 3 – Sorting and Finding the Best Ticket
+
+#### Context
+
+To offer passengers the best flight option for a desired destination, you must first sort all tickets by arrival time (earliest is best). In case of a tie, the ticket with heavier luggage is considered better. Then, you need to search for the first ticket matching the requested destination and return it.
+
+**Requirement:** Implement the sort_and_return function that sorts the tickets array in-place using the Bubble Sort method, then searches for the first ticket with the specified destination and copies it to the bestTicket structure.
+
+
+The function you have to implement has the following header:
+<br>
+```c
+        int sort_and_return(struct ticket* tickets, int nrTickets, struct ticket* bestTicket, char* destination);
+<br>
+
+-> RDI = address of the tickets array (struct ticket* tickets)
+
+-> RSI = number of tickets (int nrTickets)
+<br>
+
+-> RDX = address of the structure where the found ticket will be copied (struct ticket* bestTicket)
+<br>
+
+-> RCX =  address of the string representing the searched destination (char* destination)
+
+The function must be completed in the `subtask3.asm` file.
+
+> **Rules** <br>
+> Sorting rules (descending priority - smaller = better for times):
+
+- First compare arrivingTime.day (smaller day = earlier = better)
+- If days are equal, compare arrivingTime.hour
+- If hours are equal, compare arrivingTime.minute
+- If minutes are also equal, compare bag_weight (larger = better)
+
+> Search rules:
+
+- After sorting, traverse the array from beginning to end
+- Compare each ticket's destination with the destination string character by character (including the \0 terminator)
+- The first ticket that matches completely is the best one
+- Copy the found ticket to the structure at address bestTicket
+
+> Return values:
+
+- RAX = 1 if a ticket with the requested destination was found
+
+- RAX = 0 if no ticket with the requested destination exists
+
+> Notes: 
+
+- If nrTickets <= 1, sorting is not necessary (proceed directly to search)
+
+- The size of a ticket is 42 bytes (ticket_size)
+
+- The destination string is exactly 32 characters (including the terminator)
+
 
 ## Task 4 - Sudoku (20p)
 
