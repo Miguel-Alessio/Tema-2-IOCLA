@@ -252,12 +252,12 @@ Second, the airline wanted to filter passengers with unsuitable luggage. Only tr
 
 Finally, you needed to find the best ticket for a given destination. You sorted all tickets by arrival time — first by day, then by hour, then by minute. If two tickets arrived at the same time, the one with the heavier luggage was considered better. Then you searched for the destination and returned the best option.
 
-"All done!" Eli said with a smile.
+"All done!" Eli said with a smile.😊
 
 The agent thanked you warmly. As you left the airport, the London fog began to lift, revealing a beautiful sunset over the city. Another challenge completed, another city conquered. Your European adventure continued, one assembly task at a time. ✈️
 
 <div align="center">
-    <img title="IDS" alt="IDS" src="./src/images/airport.png" width="1000" height="1900">
+    <img title="IDS" alt="IDS" src="./src/images/bigben.png" width="1000" height="1900">
 </div>
 
 ---
