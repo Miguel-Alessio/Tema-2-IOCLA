@@ -239,7 +239,7 @@ For the second subtask will be used the same array given as input in the first s
 
 
 ## Task 3 - The London Airport Challenge (25p)
-<br>
+
 ### The Story
 
 After their success in Frankfurt, Eli, Edi, and you flew to London. The city welcomed you with its characteristic fog and the iconic sound of a double-decker bus passing by Big Ben. You had plane tickets for the journey home, but there was a problem: all flights had massive delays due to a storm in Northern Europe. The airline needed your help.
