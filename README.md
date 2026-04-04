@@ -11,7 +11,7 @@
 
 ---
 
-#### Eli & Edi are back!
+### Eli & Edi are back!
 Following the first task, Eli and Edi — our freshman students — returned with new challenges for you. In their mission to escape Instagram’s endless scroll, they begun implementing a much more powerful algorithm that will revolutionize the world. In building this top-secret algorithm, Eli is looking for help with implementing certain parts she can’t handle right now and Edi want to optimize Eli's work!
 
 <div align="center">
@@ -124,7 +124,8 @@ After counting the errors, generate the fixed lap times in the output array acco
 
 - If a driver has `error == 0`, copy its `time` unchanged to the output array..
 - If a driver has `error == 1`, repair its `time` field using the following logic:
-  - If the corrupted driver has **both** a previous and a next driver in the array → set its time to the **average** of the previous driver's time and the next driver's time (integer division, round down).
+  - If the corrupted driver is not the last or the first → set its time to the **average** of the previous driver's time and the next driver's time (integer division, round down).
+  - TODO: combina urmatoarele 2 linii (daca nu este primul nici ultimul, fa X) (vrea doar 2 case uri)
   - If the corrupted driver is the **first** element (no previous driver) → set its time equal to the **next** driver's time.
   - If the corrupted driver is the **last** element (no next driver) → set its time equal to the **previous** driver's time.
 
