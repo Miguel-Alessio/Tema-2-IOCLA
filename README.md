@@ -250,7 +250,7 @@ First, you had to apply the delays to every ticket. For each flight, you added t
 
 Second, the airline wanted to filter passengers with unsuitable luggage. Because of the storm, planes with too light of a load are vulnarable to heavy winds. Take out from the timetable any tickets that have a bag weight too low. 
 
-Finally, it's time to find the best ticket for Eli & Edi's next destinaton. Sort the ticket array  in place(first by day, then by hour, then by minute, then by weight, a heavier luggage limit being considered better). Implement whatever sorting algorithm you want. Return 1 if there is a ticket going to Eli & Edi's wanted destination or 0 if not. 
+Finally, it's time to find the best ticket for Eli & Edi's next destinaton. Sort the ticket array  in place(first by day, then by hour, then by minute, then by weight, a heavier luggage limit being considered better). Implement whatever sorting algorithm you want. Return the ticket that best fits Eli & Edi's request. Return 1 if there is a ticket going to Eli & Edi's wanted destination or 0 if not. 
 
 The agent thanked you warmly. As you left the airport, the London fog began to lift, revealing a beautiful sunset over the city. Another challenge completed, another city conquered. Your European adventure continued, one assembly task at a time. ✈️
 
@@ -279,7 +279,7 @@ You are given an array of structs of type ticket with the following layout:
 | 40     | 1    | delayMinutes           | 10           |
 | 41     | 1    | delayHours             | 2            |
 
-The next subtasks will tests your ability to work with arrays of structs in asm. You are expected to write your own structs following this layour.
+The next subtasks will test your ability to work with arrays of structs in asm. You are expected to write your own structs following the given layout.
 
 ## Subtask 1 – Apply delays
 
@@ -311,6 +311,7 @@ The function must be completed in the `subtask1.asm` file.
 
 > The delayMinutes and delayHours fields are located at the end of the structure.
 
+> Checkerul nu va verifica fieldul de delay. Up to you daca il setati la zero, il ignorati, etc
 ---
 
 ## Subtask 2 – Filtering Tickets by Luggage Weight
@@ -389,6 +390,8 @@ The function must be completed in the `subtask3.asm` file.
 - RAX = 1 if a ticket with the requested destination was found
 
 - RAX = 0 if no ticket with the requested destination exists
+
+- RDX = address of the structure that will hold the found ticket
 
 > Notes: 
 
