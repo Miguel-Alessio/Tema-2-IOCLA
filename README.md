@@ -312,6 +312,8 @@ The function you have to implement has the following header:
 <br>
 ```c
         void filter_tickets(struct ticket* origTickets, struct ticket* destTickets, int* nrTickets, int travelersBagWeight);
+```
+
 <br>
 
 -> RDI = address of the original tickets array (struct ticket* origTickets)
@@ -350,6 +352,7 @@ The function you have to implement has the following header:
 <br>
 ```c
         int sort_and_return(struct ticket* tickets, int nrTickets, struct ticket* bestTicket, char* destination);
+```
 <br>
 
 -> RDI = address of the tickets array (struct ticket* tickets)
