@@ -248,11 +248,9 @@ After their success in Frankfurt, Eli, Edi, and you flew to London. The city wel
 
 First, you had to apply the delays to every ticket. For each flight, you added the delay minutes to both departure and arrival times. If minutes exceeded 59, you carried over to hours. If hours exceeded 23, you carried over to days. Soon, every flight showed the correct new schedule.
 
-Second, the airline wanted to filter passengers with unsuitable luggage. Only travelers whose bags weighed enough would keep their tickets. You copied only the valid tickets into a new array, leaving behind those with bags that were too light.
+Second, the airline wanted to filter passengers with unsuitable luggage. Because of the storm, planes with too light of a load are vulnarable to heavy winds. Take out from the timetable any tickets that have a bag weight too low. 
 
-Finally, you needed to find the best ticket for a given destination. You sorted all tickets by arrival time — first by day, then by hour, then by minute. If two tickets arrived at the same time, the one with the heavier luggage was considered better. Then you searched for the destination and returned the best option.
-
-"All done!" Eli said with a smile.😊
+Finally, it's time to find the best ticket for Eli & Edi's next destinaton. Sort the ticket array  in place(first by day, then by hour, then by minute, then by weight, a heavier luggage limit being considered better). Implement whatever sorting algorithm you want. Return 1 if there is a ticket going to Eli & Edi's wanted destination or 0 if not. 
 
 The agent thanked you warmly. As you left the airport, the London fog began to lift, revealing a beautiful sunset over the city. Another challenge completed, another city conquered. Your European adventure continued, one assembly task at a time. ✈️
 
@@ -262,6 +260,28 @@ The agent thanked you warmly. As you left the airport, the London fog began to l
 
 ---
 
+## Problem statement
+
+---
+
+You are given an array of structs of type ticket with the following layout:
+
+| Offset | Size | Field                  | Example      |
+|--------|------|------------------------|--------------|
+| 0      | 32   | destination            | Cluj-Napoca  |
+| 32     | 1    | departingTime.day      | 15           |
+| 33     | 1    | departingTime.hour     | 10           |
+| 34     | 1    | departingTime.minutes  | 30           |
+| 35     | 1    | arrivingTime.day       | 15           |
+| 36     | 1    | arrivingTime.hour      | 12           |
+| 37     | 1    | arrivingTime.minutes   | 45           |
+| 38     | 2    | bag_weight             | 25           |
+| 40     | 1    | delayMinutes           | 10           |
+| 41     | 1    | delayHours             | 2            |
+|-------------------------------------------------------|
+
+The next subtasks will tests your ability to work with arrays of structs in asm. You are expected to write your own structs following this layour.
+
 ## Subtask 1 – Apply delays
 
 #### Context
@@ -269,7 +289,6 @@ The agent thanked you warmly. As you left the airport, the London fog began to l
 Due to the storm in Northern Europe, all flights have experienced delays. Each plane ticket contains delayMinutes and delayHours fields indicating the delay for that specific flight. You need to update the departure and arrival times for every ticket.
 
 **Requirement:** Implement the apply_delay function that receives an array of tickets and their count, and adds the delay to each ticket.
-First, we will "split" the string to be transformed into groups of 3 bytes, since the following algorithm operates on 3-byte groups.
 
 
 You will have to implement the delay algorithm, the function you have to implement has the following header:
@@ -281,21 +300,17 @@ You will have to implement the delay algorithm, the function you have to impleme
 
 -> RDI = address of the tickets array (struct ticket* tickets)
 
-<br>
-
--> RSI = number of tickets (int nrTickets
+-> RSI = number of tickets (int nrTickets)
 <br>
 
 The function must be completed in the `subtask1.asm` file.
 
 > **Other details** <br>
-> Use the structures defined in the skeleton (struc date and struc ticket).
+> You must write your own structures defined in the README (struc date and struc ticket).
 
 > The size of a ticket is ticket_size (42 bytes).
 
 > The delayMinutes and delayHours fields are located at the end of the structure.
-
-> If nrTickets is 0, the function does nothing.
 
 ---
 
@@ -303,15 +318,14 @@ The function must be completed in the `subtask1.asm` file.
 
 #### Context
 
-The airline wants to keep only passengers who have sufficiently heavy checked luggage (probably because those with very light bags have canceled their flights). You need to copy into a new array only the tickets that meet the minimum weight requirement.
+The airline wants to keep only passengers who have sufficiently heavy checked luggage. You need to copy into a new array only the tickets that meet the minimum weight requirement.
 
-**Requirement:** Implement the filter_tickets function that receives the original tickets array, a destination array, the number of tickets (passed by pointer), and the minimum luggage weight. The function will copy to the destination array only the tickets with bag_weight >= travelersBagWeight and update the ticket count.
-
+**Requirement:** Implement the filter_tickets function that receives the original tickets array, a destination array, the number of tickets (passed by pointer), and the minimum luggage weight. The function will copy to the destination array only the tickets with bag_weight >= min_bag_weight and update the ticket count.
 
 The function you have to implement has the following header:
 <br>
 ```c
-        void filter_tickets(struct ticket* origTickets, struct ticket* destTickets, int* nrTickets, int travelersBagWeight);
+        void filter_tickets(struct ticket* origTickets, struct ticket* destTickets, int* nrTickets, int min_bag_weight);
 ```
 
 <br>
@@ -325,17 +339,15 @@ The function you have to implement has the following header:
 -> RDX = address of the integer containing the number of tickets (int* nrTickets)
 <br>
 
--> RCX = minimum luggage weight (int travelersBagWeight)
+-> RCX = minimum luggage weight (int min_bag_weight)
 
 
 The function must be completed in the `subtask2.asm` file.
 
 > **Rules** <br>
-> Traverse the original array from beginning to end.
+> Update the value at address nrTickets with the new count of filtered tickets.
 
-> For each ticket, check if bag_weight >= travelersBagWeight.
-
-> At the end, update the value at address nrTickets with the new count of filtered tickets.
+> Populate the new destination tickets array
 
 ---
 
@@ -343,10 +355,7 @@ The function must be completed in the `subtask2.asm` file.
 
 #### Context
 
-To offer passengers the best flight option for a desired destination, you must first sort all tickets by arrival time (earliest is best). In case of a tie, the ticket with heavier luggage is considered better. Then, you need to search for the first ticket matching the requested destination and return it.
-
-**Requirement:** Implement the sort_and_return function that sorts the tickets array in-place using the Bubble Sort method, then searches for the first ticket with the specified destination and copies it to the bestTicket structure.
-
+You must first sort all tickets by arrival time (earliest is best). In case of a tie, the ticket with heavier luggage is considered better. Then, you need to search for the first ticket matching the requested destination and return it.
 
 The function you have to implement has the following header:
 <br>
@@ -370,17 +379,11 @@ The function must be completed in the `subtask3.asm` file.
 > **Rules** <br>
 > Sorting rules (descending priority - smaller = better for times):
 
-- First compare arrivingTime.day (smaller day = earlier = better)
+- Compare days (smaller day = earlier = better)
 - If days are equal, compare arrivingTime.hour
 - If hours are equal, compare arrivingTime.minute
 - If minutes are also equal, compare bag_weight (larger = better)
-
-> Search rules:
-
-- After sorting, traverse the array from beginning to end
-- Compare each ticket's destination with the destination string character by character (including the \0 terminator)
-- The first ticket that matches completely is the best one
-- Copy the found ticket to the structure at address bestTicket
+- Only compare the arriving values, Eli & Edi don't care about the departing times for this task
 
 > Return values:
 
@@ -390,11 +393,7 @@ The function must be completed in the `subtask3.asm` file.
 
 > Notes: 
 
-- If nrTickets <= 1, sorting is not necessary (proceed directly to search)
-
-- The size of a ticket is 42 bytes (ticket_size)
-
-- The destination string is exactly 32 characters (including the terminator)
+- The destination string will at most be 32 bytes (including the terminator)
 
 
 ## Task 4 - Sudoku (20p)
@@ -436,6 +435,7 @@ First, let's recap the rules of sudoku:
     <img title="IDS" alt="IDS" src="./src/images/sudoku.png" width="500" height="450">
 </div>
 
+Reminder: Eli and Edi are crafty people and will not stick to Sudoku boards of size 9. Some of the tests' board will be of size 4 or 16.
 
 ## Subtask 1 - Verify a row
 Being given the array, its size and a certain row, verify if the row respects Sudoku's rule.
@@ -483,8 +483,6 @@ As the matrix will be indexed starting from 0, so will the rows/columns/boxes. T
 Here is a basic way of checking if a sudoku line/row/box is valid:
 ((the sum of all numbers == size * (size + 1) / 2) && (the product of all numbers == factorial(size)))
 The sudoku board is given as an 81-long char array, and the other three arguments represent which row, column, or box to check as an integer between 0 and 8.
-
-> *Hint:* You can solve this using [Simon's](https://www.youtube.com/channel/UCC-UOdK8-mIjxBQm_ot1T-Q) sudoku secret he only tells his favourite people. This will only make solving this marginally easier, so if you don't know it already it might not be worth the effort to try and find out.
 
 ---
 
