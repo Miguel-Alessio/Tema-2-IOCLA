@@ -67,7 +67,7 @@ printf -- "---------------------- TASK 3 SCORE: %d/25 ----------------------\n\n
 make clean > /dev/null 2>&1
 
 # return to root dir
-cd ../.. 
+cd ../../
 
 echo "---------------------------- TASK 4 -----------------------------"
 TASK4_SCORE=0
@@ -101,5 +101,5 @@ TOTAL_SCORE=$((TOTAL_SCORE + TASK4_SCORE))
 printf -- "---------------------- TASK 4 SCORE: %d/20 ----------------------\n\n" $TASK4_SCORE
 
 make clean > /dev/null 2>&1
-cd ../..
+cd ../../
 

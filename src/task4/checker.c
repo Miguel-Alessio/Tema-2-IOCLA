@@ -39,7 +39,7 @@ double check_result(int test_no, int sudoku_result) {
 	ref_file = fopen(ref_filename, "r");
 	if (ref_file == NULL) {
 		perror("Error opening ref file");
-		return;
+		return 0.0;
 	}
 	
 
@@ -84,7 +84,6 @@ int main(int argc, char **argv) {
 	// get test number from bash
 	int test_no = atoi(argv[1]);
 
-	double score = 0.0;
 	int **sudoku;
 	
 	// malloc matrix. make sure it's big enough to handly any input
