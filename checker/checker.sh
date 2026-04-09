@@ -4,7 +4,7 @@ echo "=========================== Tema 3 PCLP2 =========================="
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(dirname "$SCRIPT_DIR")"
-cd "$ROOT_DIR" || { echo -e "Can't find src folder!"; exit 1; }
+cd "$ROOT_DIR" || { echo -e "Can't find root folder!"; exit 1; }
 
 # add task1 & task2 when the checkers are implemented
 TASKS=("task3" "task4")
@@ -102,5 +102,39 @@ printf -- "---------------------- TASK 4 SCORE: %d/20 ----------------------\n\n
 
 make clean > /dev/null 2>&1
 cd ../../
+
+echo "=========================== Linter ================================"
+
+LINTER_SCORE=10
+LINTER_FAILED=0
+
+ASM_FILES=$(find "$ROOT_DIR/src" -name "*.asm")
+
+if [ -z "$ASM_FILES" ]; then
+    echo "where are the .asm files bro"
+    LINTER_FAILED=1
+else
+    for FILE in $ASM_FILES; do
+        # run the linter
+        LINTER_OUT=$(PYTHONPATH="$ROOT_DIR" python3 "$ROOT_DIR/checker/linter/linter-script-file" "$FILE" 2>&1)
+
+        # check if anything was printed
+        if [ -n "$LINTER_OUT" ]; then
+            echo "Linter warnings in $FILE:"
+            echo "$LINTER_OUT"
+            LINTER_FAILED=1
+        fi
+    done
+fi
+
+if [ $LINTER_FAILED -eq 0 ]; then
+    printf -- "LINTER---------------------------------------------------PASSED: 10p\n"
+else
+    printf -- "LINTER---------------------------------------------------FAILED: 0p\n"
+    LINTER_SCORE=0
+fi
+echo ""
+
+TOTAL_SCORE=$((TOTAL_SCORE + LINTER_SCORE))
 
 printf "Total:%d/100\n" $TOTAL_SCORE

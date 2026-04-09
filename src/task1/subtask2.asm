@@ -29,9 +29,9 @@ fix_lap_times:
 	;; DO NOT MODIFY
 
 	;; Your code starts here
-	
+
 	;; Your code ends here
-	
+
 	;; DO NOT MODIFY
 	pop     r15
 	pop     r14
