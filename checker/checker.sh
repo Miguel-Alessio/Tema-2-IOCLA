@@ -103,3 +103,4 @@ printf -- "---------------------- TASK 4 SCORE: %d/20 ----------------------\n\n
 make clean > /dev/null 2>&1
 cd ../../
 
+printf "Total:%d/100\n" $TOTAL_SCORE
