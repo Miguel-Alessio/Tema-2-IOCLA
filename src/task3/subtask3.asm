@@ -1,11 +1,11 @@
 ; write the structures
-struc date
-		???
-endstruct
+; struc date
+; 		???
+; endstruct
 
-struct ticket
-		???
-endstruct
+; struct ticket
+; 		???
+; endstruct
 
 
 section .text

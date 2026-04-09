@@ -1,108 +1,105 @@
 #!/bin/bash
 
-EXECUTABLE="../src/perfect"
-TIMEOUT_DURATION=10
-SCORE=0
+echo "=========================== Tema 3 PCLP2 =========================="
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ROOT_DIR="$(dirname "$SCRIPT_DIR")"
+cd "$ROOT_DIR" || { echo -e "Can't find src folder!"; exit 1; }
+
+# add task1 & task2 when the checkers are implemented
+TASKS=("task3" "task4")
+
+for TASK in "${TASKS[@]}"; do
+    if [ -d "src/$TASK" ]; then
+        # clean then make
+        make clean -C "src/$TASK" #> /dev/null 2>&1
+        make -C "src/$TASK" #> /dev/null 2>&1
+        
+        if [ $? -ne 0 ]; then
+            echo "Compilation failed for $TASK!"
+            exit 1
+        fi
+    else
+        echo "Directory src/$TASK not found!"
+        exit 1
+    fi
+done
+
 TOTAL_SCORE=0
 
-test_err()
-{
-    local temp_output=''
-    temp_output="$(mktemp)"
+echo "----------------------------- TASK 3 ------------------------------"
+TASK3_SCORE=0
+NUM_TESTS=5
+POINTS_PER_TEST=5
 
-    timeout "$TIMEOUT_DURATION" bash -c "$EXECUTABLE > $temp_output 2>&1"
+# move to task 3 dir
+cd src/task3
+# make output dir
+mkdir -p output
 
-    diff -Zq "$temp_output" "./references/ref1" > /dev/null 2>&1
-    return $?
-}
-
-test_single()
-{
-    local temp_output=''
-    temp_output="$(mktemp)"
-
-    timeout "$TIMEOUT_DURATION" xargs -a ./input/input2 -0 -I{} bash -c "$EXECUTABLE {} > $temp_output 2>&1"
-
-    diff -Zq "$temp_output" "./references/ref2" > /dev/null 2>&1
-    return $?
-}
-
-test_multiple()
-{
-    local temp_output=''
-    temp_output="$(mktemp)"
-
-    timeout "$TIMEOUT_DURATION" xargs -a ./input/input3 -0 -I{} bash -c "$EXECUTABLE {} > $temp_output 2>&1"
-
-    diff -Zq "$temp_output" "./references/ref3" > /dev/null 2>&1
-    return $?
-}
-
-test_edge()
-{
-    local temp_output=''
-    temp_output="$(mktemp)"
-
-    timeout "$TIMEOUT_DURATION" xargs -a ./input/input4 -0 -I{} bash -c "$EXECUTABLE {} > $temp_output 2>&1"
-
-    diff -Zq "$temp_output" "./references/ref4" > /dev/null 2>&1
-    return $?
-}
-
-setup()
-{
-    pushd ../src > /dev/null || exit 1
-    make -s build
-    popd > /dev/null || exit 1
-}
-
-cleanup()
-{
-    pushd ../src > /dev/null || exit 1
-    make -s clean
-    popd > /dev/null || exit 1
-}
-
-test_fun_array=(                        \
-	test_err            "Name 1"    25  \
-	test_single         "Name 2"    25  \
-	test_multiple       "Name 3"    25  \
-	test_edge           "Name 4"    25  \
-)
-
-run_test()
-{
-    test_index="$1"
-    test_func_index=$((test_index * 3))
-    description=${test_fun_array[$((test_func_index + 1))]}
-    points=${test_fun_array[$((test_func_index + 2))]}
-    TOTAL_SCORE=$((TOTAL_SCORE + points))
-
-    echo -ne "Testing\t\t$description\t"
-    if ${test_fun_array["$test_func_index"]} ; then
-        SCORE=$((SCORE + points))
-        echo "$points/$points"
-        return 0
-    else
-        echo "0/$points"
-        return 1
-    fi
-}
-
-test_all()
-{
-    for i in $(seq 0 "$((${#test_fun_array[@]} / 3 - 1))") ; do
-        run_test "$i"
-    done
-
-    echo -e "\nTotal: $SCORE/$TOTAL_SCORE"
-}
-
-setup
-if [ -z "$1" ] ; then
-    test_all
+# make sure you keep the exec name "checker"
+if [ ! -f "./checker" ]; then
+    echo -e "Executable not found\n"
 else
-    run_test "$1"
-    exit $?
+    for (( i=1; i<=NUM_TESTS; i++ ))
+    do
+        # timeout in case of infinite loop
+        timeout 2s ./checker $i > /dev/null 2>&1
+        EXIT_CODE=$?
+
+        if [ $EXIT_CODE -eq 0 ]; then
+            printf "Test %d---------------------------------------------------PASSED: %dp\n" $i $POINTS_PER_TEST
+            TASK3_SCORE=$((TASK3_SCORE + POINTS_PER_TEST))
+        elif [ $EXIT_CODE -eq 124 ]; then
+            printf "Test %d--------------------------------------FAILED (Time Limit): 0p\n" $i
+        elif [ $EXIT_CODE -eq 139 ]; then
+            printf "Test %d--------------------------------------FAILED (Seg  Fault): 0p\n" $i
+        else
+            printf "Test %d--------------------------------------FAILED (Wrong  Ans): 0p\n" $i
+        fi
+    done
 fi
-cleanup
+
+TOTAL_SCORE=$((TOTAL_SCORE + TASK3_SCORE))
+printf -- "---------------------- TASK 3 SCORE: %d/25 ----------------------\n\n" $TASK3_SCORE
+
+# clean
+make clean > /dev/null 2>&1
+
+# return to root dir
+cd ../.. 
+
+echo "---------------------------- TASK 4 -----------------------------"
+TASK4_SCORE=0
+NUM_TESTS=5
+POINTS_PER_TEST=4
+
+cd src/task4
+mkdir -p output
+
+if [ ! -f "./checker" ]; then
+    echo -e "Executable not found\n"
+else
+    for (( i=1; i<=NUM_TESTS; i++ ))
+    do
+        timeout 2s ./checker $i > /dev/null 2>&1
+        EXIT_CODE=$?
+
+        if [ $EXIT_CODE -eq 0 ]; then
+            printf "Test %d---------------------------------------------------PASSED: %dp\n" $i $POINTS_PER_TEST
+            TASK4_SCORE=$((TASK4_SCORE + POINTS_PER_TEST))
+        elif [ $EXIT_CODE -eq 124 ]; then
+            printf "Test %d--------------------------------------FAILED (Time Limit): 0p\n" $i
+        elif [ $EXIT_CODE -eq 139 ]; then
+            printf "Test %d--------------------------------------FAILED (Seg  Fault): 0p\n" $i
+        else
+            printf "Test %d--------------------------------------FAILED (Wrong  Ans): 0p\n" $i
+        fi
+    done
+fi
+TOTAL_SCORE=$((TOTAL_SCORE + TASK4_SCORE))
+printf -- "---------------------- TASK 4 SCORE: %d/20 ----------------------\n\n" $TASK4_SCORE
+
+make clean > /dev/null 2>&1
+cd ../..
+

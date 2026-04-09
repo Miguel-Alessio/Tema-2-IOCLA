@@ -1,11 +1,11 @@
 ; write the structures. make sure it fits the layour in the README
-struc date
-		???
-endstruct
+; struc date
+; 		???
+; endstruct
 
-struct ticket
-		???
-endstruct
+; struct ticket
+; 		???
+; endstruct
 
 section .text
 
