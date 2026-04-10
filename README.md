@@ -31,9 +31,9 @@ In order to enjoy the landscapes and atmosphere of each place without worries, t
 
 Their first destination was Paris. As the plane slowly descended, Eli pressed her face against the window, fascinated by the glowing city lights, while Edi was already thinking ahead, planning routes and schedules.
 
-- “First stop: the Eiffel Tower. Second stop: food,” Edi said with a confident smile. 😁
+- “First stop: the Eiffel Tower. Second stop: food,” Edi said with a confident smile.
 
-- “Third stop: somehow solving the assembly challenge waiting for us,” Eli added, laughing. 😅
+- “Third stop: somehow solving the assembly challenge waiting for us,” Eli added, laughing.
 
 From that moment, you realized this trip would be anything but ordinary.
 
