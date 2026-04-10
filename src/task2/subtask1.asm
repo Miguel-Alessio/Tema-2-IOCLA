@@ -1,5 +1,5 @@
-%include "../include/io.mac"
-extern printf
+; %include "../include/io.mac"
+; extern printf
 global filter_drivers
 
 ; Driver struct layout (8 bytes total):
