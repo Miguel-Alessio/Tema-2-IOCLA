@@ -185,7 +185,8 @@ drivers_out_time: [75, 83, 91, 85, 79, 87, 95, 95]
 ---
 
 ## Task 2 - Frankfurt: Phantom Driver Cyber Attack (25p)
-<br>
+
+
 ### The Story
 
 After their heroic rescue of Ferrari's telemetry system in Monaco, Eli and Edi board a flight to Frankfurt, the financial heart of Europe. They plan to relax in the famous Palmengarten gardens, but fate has other plans.
