@@ -261,8 +261,6 @@ The malware is counting how many comparison steps your binary search performs. I
 
 If you reverse the array, the search must still find the **first driver** in the **reversed order** that satisfies `access_level >= X`. Remember that reversing changes the order of elements!
 
-**Important:** You only reverse **once** if the step limit is exceeded. After reversing, continue normally without further reversals.
-
 **Input:**
 - `RDI` = address of filtered array (from Subtask 1)
 - `RSI` = length of filtered array
