@@ -26,6 +26,6 @@ build:
 checker:
     stage: test
     image:
-        name: gitlab.cs.pub.ro:5050/vmchecker/vmchecker-next-assignment
+        name: gitlab.cs.pub.ro:5050/iocla/tema-2-2026-private
     script:
         - echo ""

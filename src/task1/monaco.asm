@@ -19,13 +19,11 @@ count_errors:
     push r14
     push r15
     ;; DO NOT MODIFY
-    
     ;; Your code starts here
-    
-    
-    
+
+
+
     ;; Your code ends here
-    
     ;; DO NOT MODIFY
     pop r15
     pop r14
@@ -58,13 +56,11 @@ fix_lap_times:
     push r14
     push r15
     ;; DO NOT MODIFY
-    
     ;; Your code starts here
-    
-    
-    
+
+
+
     ;; Your code ends here
-    
     ;; DO NOT MODIFY
     pop r15
     pop r14
