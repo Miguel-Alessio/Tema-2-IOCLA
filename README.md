@@ -146,24 +146,6 @@ After counting the errors, generate the fixed lap times in the output array acco
 
 ---
 
-## Subtask 3 – Return the Fixed Array and Verification
-
-After performing the repairs, return the modified array to the caller and also compute a simple **checksum** of all lap times (sum of all `time` fields) after repair.
-
-**Input:**
-- `RDI` = address of input lap times array
-- `RSI` = address of errors array
-- `RDX` = number of drivers
-- `RCX` = address of output lap times array
-- `R8` = address of integer where to store the error count
-
-**Output:**
-- `RAX` = checksum (sum of all `time` fields in ` drivers_out_time` after repair)
-- `*error_count` (at address R8) = number of errors fixed
-- `drivers_out_time` array is filled with fixed lap times
-
----
-
 ## Constraints
 
 - Array length: 1 ≤ `num_drivers` ≤ 10,000
@@ -178,63 +160,90 @@ After performing the repairs, return the modified array to the caller and also c
 
 After their heroic rescue of Ferrari's telemetry system in Monaco, Eli and Edi board a flight to Frankfurt, the financial heart of Europe. They plan to relax in the famous Palmengarten gardens, but fate has other plans.
 
-As they exit the airport, Eli's phone rings. It's Kaan, a friend from university who now works as a security engineer at Deutsche Bank. His voice is trembling: "The signal processing system for our armored truck fleet has been infected. A malware called 'Phantom Driver' is injecting fake driver profiles into our arrays. Our routing algorithms can't distinguish real drivers from ghosts, and we're losing millions in delayed deliveries!"
+As they exit the airport, Edi's phone rings. It's Klara, a friend from university who now works as a security engineer at **Deutsche Bank**. Her voice is trembling: "The signal processing system for our armored truck fleet has been infected. A malware called 'Phantom Driver' is injecting fake driver profiles into our arrays. Our routing algorithms can't distinguish real drivers from ghosts, and we're losing millions in delayed deliveries!"
+
+The malware works by inserting driver entries with the `is_phantom` flag set to 1. Worse, it's adaptive – if it detects a simple filter, it changes its injection pattern. Klara needs a program that can:
+
+1. Filter real German drivers from the massive dataset
+2. Intelligently search for drivers with suspicious access levels
+
+But here's the catch – the malware is actively monitoring memory access patterns. If it detects a standard algorithm, it will trigger a system-wide lockout. Eli and Edi must write code that **changes behavior dynamically** based on what it finds during execution.
+
+"This is like a chess match against an AI," Edi whispers. "We need to adapt our strategy in real-time."
+
+Klara uploads the assembly skeleton to their laptops. "The system only accepts raw x86-64 code. No C, no standard library. You have 15 minutes before the next attack wave."
+
+Eli looks at you, their trusted coding partner. "Ready for some cyber chess?"
 
 <div align="center">
     <img title="IDS" alt="IDS" src="./src/images/frankfurt.jpeg" width="700" height="1000">
 </div>
 
+---
 
-### Subtask 1
+## Problem Statement
 
-For this subtask, you have to check if the date of each event is valid, based
-on the next rules:
+You are given an array of driver structures (size 8 bytes each) with the following layout:
 
-- The year should be between 1990 and 2030
-- The month should be between 1 and 12
-- The day should be between 1 and the last day of each month (e.g. for January the last day is 31, for February, it is 28)
+| Offset | Size | Field | Description |
+|--------|------|-------|-------------|
+| 0      | 4    | access_level | Security access level (0-100, higher = more access) |
+| 4      | 2    | nationality | Country code: 'DE'=0x4445, 'RO'=0x4F52, 'UK'=0x4B55, 'FR'=0x5246 |
+| 6      | 1    | is_phantom | 1 = malware-created driver, 0 = real driver |
+| 7      | 1    | flags | Bit flags: bit0 = under_investigation, bit1 = priority_clearance |
 
-If a date is valid, set the `valid` flag in the `event` structure to 1 (True), to 0 (False) otherwise.
+Your mission is to process this array and actively defend against the malware's adaptive behavior.
 
-The function definition is:
+---
 
-```c
-void check_events(struct event *events, int len);
-```
 
-The arguments are:
+### Subtask 1 - Smart filtering
 
-- **events:** start address of the events array
-- **len:** number of events in the array
+While filtering, you must track how many drivers have the under_investigation flag set (bit0 of flags). Every time you encounter 3 such drivers, activate stealth mode. Once stealth mode is active, you must also include Romanian drivers (nationality == 'RO') in the filtered output, regardless of any other conditions.
 
-### Subtask 2
-
-For this subtask, you have to sort the events resulted after the first subtask
-following the next steps while comparing two events:
-
-- if an event is valid, it is **not** considered greater, which means all the valid events should come first
-- if two events are valid, they should be sorted by their date, by year, then by month, then by date
-- if the dates of two events are equal, they should be sorted like using `strcmp()` function by their name and using its result, so if the result is negative, it means the first name should come first in the sorted array
-
-The sorting should be done **in place**, that means that the array given as input should contain the sorted
-events and that is what will be checked.
+Stealth mode remains active for the rest of the filtering process (once activated, it stays on).
 
 The function definition is:
 
 ```c
-void sort_events(struct event *events, int len);
+void filter_drivers(struct driver *input_array, int num_drivers);
 ```
 
-The arguments are:
+**Input:**
+- `RDI` = address of input array (struct driver *input_array)
+- `RSI` = number of drivers (int num_drivers)
 
-- **events:** start address of the events array
-- **len:** number of events in the array
+**Output:**
+- `RAX` = address of filtered array
+- `RBX` = number of drivers from filtered array
+- `RCX` = 1 for stealth mode activated, 0 else
 
-**All the data in the structures will be limited to their data type size and the name of the events is unique!**
+### Subtask 2 - Adaptive binary search
 
-#### **Important Notice**
+On the **filtered array** from Subtask 1, perform a binary search to find the **first driver** with `access_level >= X` (where `X` is provided as a parameter).
 
-For the second subtask will be used the same array given as input in the first subtask, this means that any wrong modifications of the structures during the first subtask will affect the second task and it will result in a failed test. The second subtask can not be completed without completing the first subtask.
+**The Dynamic Action:**  
+The malware is counting how many comparison steps your binary search performs. If your search takes **more than 10 steps** (comparisons of access_level values), the malware will detect the search pattern. To evade detection, you must:
+
+1. **Reverse the entire filtered array** (in place)
+2. **Reset your step counter** to 0
+3. **Continue the binary search** on the reversed array
+
+If you reverse the array, the search must still find the **first driver** in the **reversed order** that satisfies `access_level >= X`. Remember that reversing changes the order of elements!
+
+**Important:** You only reverse **once** if the step limit is exceeded. After reversing, continue normally without further reversals.
+
+**Input:**
+- `RDI` = address of filtered array (from Subtask 1)
+- `RSI` = length of filtered array
+- `RDX` = threshold `X` (32-bit integer)
+
+**Output:**
+- `RAX` = index of found driver (0-based) or -1 if not found
+- `RBX` = number of steps taken before finding (or finishing search)
+- `RCX` = 1 if array was reversed, 0 otherwise
+
+---
 
 <br>
 
