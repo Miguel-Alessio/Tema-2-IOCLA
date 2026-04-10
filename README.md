@@ -303,7 +303,7 @@ First, you had to apply the delays to every ticket. For each flight, you added t
 
 Second, the airline wanted to filter passengers with unsuitable luggage. Because of the storm, planes with too light of a load are vulnarable to heavy winds. Take out from the timetable any flights that have a bag weight too low. 
 
-Finally, it's time to find the best ticket for Eli & Edi's next destinaton. Sort the ticket array  in place(first by day, then by hour, then by minute, then by weight, a heavier luggage limit being considered better). Implement whatever sorting algorithm you want. Return the ticket that best fits Eli & Edi's request. Return 1 if there is a ticket going to Eli & Edi's wanted destination or 0 if not. 
+Finally, it's time to find the best ticket for Eli & Edi's next destinaton. Sort the ticket array in place(first by day, then by hour, then by minute, then by weight, a heavier luggage limit being considered better). Implement whatever sorting algorithm you want. Return the ticket that best fits Eli & Edi's request. Return 1 if there is a flight going to Eli & Edi's wanted destination or 0 if not. 
 
 The agent thanked you warmly. As you left the airport, the London fog began to lift, revealing a beautiful sunset over the city. Another challenge completed, another city conquered. Your European adventure continued, one assembly task at a time. ✈️
 
@@ -364,16 +364,19 @@ The function must be completed in the `subtask1.asm` file.
 
 > The delayMinutes and delayHours fields are located at the end of the structure.
 
-> Checkerul nu va verifica fieldul de delay. Up to you daca il setati la zero, il ignorati, etc
+> The checker will not check the delay fields from the resulting array for any of the subtasks. Up to you if you set those fields to 0, ignore them, etc.
+
+> All flights will still be in the same month, even after applying delays
+
 ---
 
 ## Subtask 2 – Filtering Tickets by Luggage Weight
 
 #### Context
 
-The airline wants to keep only passengers who have sufficiently heavy checked luggage. You need to copy into a new array only the tickets that meet the minimum weight requirement.
+The airline wants to keep only flights' tickets who have sufficiently heavy luggage. You need to copy into a new array only the tickets that meet the minimum weight requirement.
 
-**Requirement:** Implement the filter_tickets function that receives the original tickets array, a destination array, the number of tickets (passed by pointer), and the minimum luggage weight. The function will copy to the destination array only the tickets with bag_weight >= min_bag_weight and update the ticket count.
+**Requirement:** Implement the filter_tickets function that receives the original array, a destination array, the number of tickets (passed by pointer), and the minimum luggage weight. The function will copy to the destination array only the tickets with bag_weight >= min_bag_weight and update the ticket count. Update the number of tickets/RDX to reflect the number of elements in the destination array.
 
 The function you have to implement has the following header:
 <br>
@@ -477,7 +480,7 @@ The array is split into boxes of sqrt(array size) x sqrt(array_size). These boxe
 
 ### The Task
 
-First, let's recap the rules of sudoku:
+First, let's recap the rules of sudoku (for a 9x9 board):
 - In each row, the digits 1-9 must appear exactly once
 - In each column, the digits 1-9 must appear exactly once
 - In each box, the digits 1-9 must appear exactly once
@@ -493,7 +496,7 @@ First, let's recap the rules of sudoku:
 Reminder: Eli and Edi are crafty people and will not stick to Sudoku boards of size 9. Some of the tests' board will be of size 4 or 16.
 
 ## Subtask 1 - Verify a row
-Being given the array, its size and a certain row, verify if the row respects Sudoku's rule.
+Being given the array, its size and a certain row, verify if the row respects Sudoku's rules.
 
 **Input**
 - `RDI` = address of the array
@@ -506,7 +509,7 @@ Being given the array, its size and a certain row, verify if the row respects Su
 ---
 
 ## Subtask 2 - Verify a column
-Being given the array, its size and a certain column, verify if the column respects Sudoku's rule.
+Being given the array, its size and a certain column, verify if the column respects Sudoku's rules.
 
 **Input**
 - `RDI` = address of the array
@@ -519,7 +522,7 @@ Being given the array, its size and a certain column, verify if the column respe
 ---
 
 ## Subtask 3 - Verify a box
-Being given the array, its size and a certain box, verify if the box respects Sudoku's rule.
+Being given the array, its size and a certain box, verify if the box respects Sudoku's rules.
 
 **Input**
 - `RDI` = address of the array
@@ -537,11 +540,10 @@ As the matrix will be indexed starting from 0, so will the rows/columns/boxes. T
 ## HINT!
 Here is a basic way of checking if a sudoku line/row/box is valid:
 ((the sum of all numbers == size * (size + 1) / 2) && (the product of all numbers == factorial(size)))
-The sudoku board is given as an 81-long char array, and the other three arguments represent which row, column, or box to check as an integer between 0 and 8.
 
 ---
 
-## Coding Style & README (10p)
+## Coding Style (10p)
 
 To be able to use your solutions in the implementation of the secret algorithm, Eli needs well-structured and readable assembly code that follows a few good practice rules:
 
@@ -549,42 +551,19 @@ To be able to use your solutions in the implementation of the secret algorithm, 
 - consistent indentation (the recommendation is to place labels at the beginning of the line and indent instructions with one tab)
 - using meaningful names for labels
 - including **relevant and necessary** comments in the code
-- writing code lines (or README) with a maximum of 80–100 characters
-
-You will also need to include a brief explanation of the solution for each task in a README file, this is a requirment from Edi.
-
-**The score for coding style and README is not included in the checker and will be awarded during evaluation.**
 
 ---
 
 ## Checker
 
-To use the checker `local_checker.py`:
-<br>
--> you need to have Python3 installed
-<br>
--> you need to be in `./src`.
+Simply run ./checker/checker.sh to verify the homework locally. You must upload your zip on moddle for your actual grade (use the make pack rule)
 
+If you wish to verify a certain test from a task, run the checker executable from its directory.
 
-To view the list of possible script arguments:
+For example, for verifying test 2 from task 3:
+./src/task3/checker 2
 
-```bash
-    python3 local_checker.py --help
-```
-
-To run all tests:
-
-```bash
-    python3 local_checker.py --all
-```
-To create the archive that you need to upload on Moodle (**does not include the README; you must manually add this file to the final archive**):
-
-```bash
-    python3 local_checker.py --zip
-```
-
-During a normal run, the checker will not keep your outputs—it will perform a clean.
-To keep the outputs, add the `--no_clean` argument when running the checker.
+This command only write your code's output to ./output, it doesn't actually compare it to the ./ref files
 
 ---
 
