@@ -244,7 +244,21 @@ If you reverse the array, the search must still find the **first driver** in the
 - `RCX` = 1 if array was reversed, 0 otherwise
 
 ---
+**IMPORTANT!** Hex format for driver (8 bytes)
+<access_level_4bytes_hex> <nationality_2bytes_hex> <is_phantom_1byte_hex> <flags_1byte_hex>
 
+Example:
+10 0x4445 0 0  ->  0a000000 4544 00 00  ->  0a00000045440000
+40 0x4445 0 2  ->  28000000 4544 00 02  ->  2800000045440002
+35 0x4F52 0 2  ->  23000000 4f52 00 02  ->  230000004f520002
+
+access_level is little-endian (4 bytes)
+
+nationality is little-endian (2 bytes)
+
+is_phantom and flags are each one 1 byte
+
+Final result is a  hex of 16 characters (8 bytes)
 <br>
 
 
