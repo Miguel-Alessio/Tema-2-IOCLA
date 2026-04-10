@@ -244,8 +244,8 @@ void filter_drivers(struct driver *input_array, int num_drivers);
 - `RSI` = number of drivers (int num_drivers)
 
 **Output:**
-- `RAX` = address of filtered array
-- `RBX` = number of drivers from filtered array
+- `RAX` = address of filtered array (is_phantom == 0 and nationality == 'DE' - cod hex 0x4445)
+- `RBX` = number of drivers in filtered array
 - `RCX` = 1 for stealth mode activated, 0 else
 
 ### Subtask 2 - Adaptive binary search
