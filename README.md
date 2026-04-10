@@ -261,6 +261,7 @@ Example:
 Final result is a  hex of 16 characters (8 bytes)
 <br>
 
+---
 
 ## Task 3 - The London Airport Challenge (25p)
 
