@@ -124,12 +124,12 @@ After counting the errors, generate the fixed lap times in the output array acco
 
 - If a driver has `error == 0`, copy its `time` unchanged to the output array..
 - If a driver has `error == 1`, repair its `time` field using the following logic:
-  - If the corrupted driver is not the last or the first → set its time to the **average** of the previous driver's time and the next driver's time (integer division, round down).
-  - TODO: combina urmatoarele 2 linii (daca nu este primul nici ultimul, fa X) (vrea doar 2 case uri)
-  - If the corrupted driver is the **first** element (no previous driver) → set its time equal to the **next** driver's time.
-  - If the corrupted driver is the **last** element (no next driver) → set its time equal to the **previous** driver's time.
+  - Case 1 - Middle element: If the corrupted driver is neither first nor last (i.e., it has both previous and next neighbors), set its time to the average of the previous driver's time and the next driver's time. Use integer division and round down.
+  - Case 2 - Edge element: If the corrupted driver is either first or last:
+    - If it is the first element (no previous driver), set its time equal to the next driver's time.
+    - If it is the last element (no next driver), set its time equal to the previous driver's time.
 
-**Important:** When computing the fix for a corrupted driver, use the original (input) values from the neighbors in drivers_in_time, not the values that might have already been written to drivers_out_time.
+**Important:** When computing the fix for a corrupted driver, always use the original (input) values from the neighbors in drivers_in_time, not values that might have already been written to drivers_out_time.
 
 **Input:**
 - `RDI` = address of input lap times array (unsigned int, 4 bytes each)
@@ -143,7 +143,37 @@ After counting the errors, generate the fixed lap times in the output array acco
 - `*error_count` (at address R8) is set to number of errors found
 - No return value in RAX (void function)
 
+**Example:**
 
+Input:
+```c
+num_drivers = 8
+drivers_in_time: [75, 82, 91, 68, 79, 88, 95, 73]
+errors:         [ 0,  1,  0,  1,  0,  1,  0,  1]
+```
+Processing:
+
+Index 0: error=0 → copy 75
+
+Index 1: error=1, middle → (75+91)/2 = 83
+
+Index 2: error=0 → copy 91
+
+Index 3: error=1, middle → (91+79)/2 = 85
+
+Index 4: error=0 → copy 79
+
+Index 5: error=1, middle → (79+95)/2 = 87
+
+Index 6: error=0 → copy 95
+
+Index 7: error=1, last → copy previous = 95
+
+Output:
+```c
+error_count = 4
+drivers_out_time: [75, 83, 91, 85, 79, 87, 95, 95]
+```
 ---
 
 ## Constraints
