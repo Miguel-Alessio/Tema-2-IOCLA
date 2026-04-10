@@ -41,6 +41,11 @@ void printOutput(char *filename, unsigned int *out_times, int out_n, int error_c
 {
 	FILE *output = fopen(filename, "w");
 
+	if (output == NULL) {
+		perror("Error opening output file");
+		return;
+	}
+
 	fprintf(output, "%d\n", error_count);
 	for (int i = 0; i < out_n; ++i) {
 		fprintf(output, "%u ", out_times[i]);
