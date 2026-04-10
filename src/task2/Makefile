@@ -1,9 +1,9 @@
 CC = gcc
 ASM = nasm
 
-CFLAGS = -Wall -g -Wpointer-arith -m64 -no-pie
+CFLAGS = -Wall -g -Wpointer-arith
 ASMFLAGS = -f elf64 -g
-LDFLAGS = -no-pie -lm
+LDFLAGS =
 
 TARGET_EXEC = checker
 
@@ -24,10 +24,7 @@ $(TARGET_EXEC): $(OBJS)
 %.o: %.asm
 	$(ASM) $(ASMFLAGS) $< -o $@
 
-.PHONY: clean run
-
-run: $(TARGET_EXEC)
-	./$(TARGET_EXEC)
+.PHONY: clean
 
 clean:
-	$(RM) *.o $(TARGET_EXEC)
+	$(RM) *.o *.d $(TARGET_EXEC)
