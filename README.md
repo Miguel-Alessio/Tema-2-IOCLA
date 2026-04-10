@@ -301,7 +301,7 @@ After their success in Frankfurt, Eli, Edi, and you flew to London. The city wel
 
 First, you had to apply the delays to every ticket. For each flight, you added the delay minutes to both departure and arrival times. If minutes exceeded 59, you carried over to hours. If hours exceeded 23, you carried over to days. Soon, every flight showed the correct new schedule.
 
-Second, the airline wanted to filter passengers with unsuitable luggage. Because of the storm, planes with too light of a load are vulnarable to heavy winds. Take out from the timetable any tickets that have a bag weight too low. 
+Second, the airline wanted to filter passengers with unsuitable luggage. Because of the storm, planes with too light of a load are vulnarable to heavy winds. Take out from the timetable any flights that have a bag weight too low. 
 
 Finally, it's time to find the best ticket for Eli & Edi's next destinaton. Sort the ticket array  in place(first by day, then by hour, then by minute, then by weight, a heavier luggage limit being considered better). Implement whatever sorting algorithm you want. Return the ticket that best fits Eli & Edi's request. Return 1 if there is a ticket going to Eli & Edi's wanted destination or 0 if not. 
 
