@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "=========================== Tema 3 PCLP2 =========================="
+echo "=========================== Tema 2 / PCLP2 / 2026 =========================="
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(dirname "$SCRIPT_DIR")"
@@ -62,6 +62,48 @@ fi
 
 TOTAL_SCORE=$((TOTAL_SCORE + TASK1_SCORE))
 printf -- "---------------------- TASK 1 SCORE: %d/20 ----------------------\n\n" $TASK1_SCORE
+
+# clean
+make clean > /dev/null 2>&1
+
+# return to root dir
+cd ../../
+
+echo "----------------------------- TASK 2 ------------------------------"
+TASK1_SCORE=0
+NUM_TESTS=5
+POINTS_PER_TEST=5
+
+# move to task dir
+cd src/task1
+# make output dir
+mkdir -p output
+
+# make sure you keep the exec name "checker"
+if [ ! -f "./checker" ]; then
+    echo -e "Executable not found\n"
+else
+    for (( i=1; i<=NUM_TESTS; i++ ))
+    do
+        # timeout in case of infinite loop
+        timeout 2s ./checker $i > /dev/null 2>&1
+        EXIT_CODE=$?
+
+        if [ $EXIT_CODE -eq 0 ]; then
+            printf "Test %d---------------------------------------------------PASSED: %dp\n" $i $POINTS_PER_TEST
+            TASK1_SCORE=$((TASK1_SCORE + POINTS_PER_TEST))
+        elif [ $EXIT_CODE -eq 124 ]; then
+            printf "Test %d--------------------------------------FAILED (Time Limit): 0p\n" $i
+        elif [ $EXIT_CODE -eq 139 ]; then
+            printf "Test %d--------------------------------------FAILED (Seg  Fault): 0p\n" $i
+        else
+            printf "Test %d--------------------------------------FAILED (Wrong  Ans): 0p\n" $i
+        fi
+    done
+fi
+
+TOTAL_SCORE=$((TOTAL_SCORE + TASK2_SCORE))
+printf -- "---------------------- TASK 1 SCORE: %d/25 ----------------------\n\n" $TASK2_SCORE
 
 # clean
 make clean > /dev/null 2>&1
