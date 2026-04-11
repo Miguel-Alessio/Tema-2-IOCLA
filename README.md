@@ -12,7 +12,6 @@
 ---
 
 ### Eli & Edi are back!
-Following the first task, Eli and Edi — our freshman students — returned with new challenges for you. In their mission to escape Instagram’s endless scroll, they begun implementing a much more powerful algorithm that will revolutionize the world. In building this top-secret algorithm, Eli is looking for help with implementing certain parts she can’t handle right now and Edi want to optimize Eli's work!
 
 <div align="center">
     <img title="IDS" alt="IDS" src="./src/images/intro.png" width="700" height="1500">
@@ -23,7 +22,7 @@ Following the first task, Eli and Edi — our freshman students — returned wit
 
 ---
 
-The unbeatable duo from homework 1 continues their adventure in topic 2, only this time you get to know each other better, and because you are friends, they reveal their real identities: Elisa and Eduard. The two tell you that they have been inseparable friends since the first day of college, from the first programming course where they sat next to each other. They share common passions and interests, including traveling, technology, and having fun with friends.
+The unbeatable duo from homework 1 continues their adventure in topic 2, only this time you get to know each other better, and because you are friends, they reveal their real identities: Eli and Edi. The two tell you that they have been inseparable friends since the first day of college, from the first programming course where they sat next to each other. They share common passions and interests, including traveling, technology, and having fun with friends.
 
 After an academic year full of exams, assignments, and projects, they decided to celebrate their success with a memorable vacation through the great cities of Europe. Although they are excited about the adventure, they know that in each destination an assembly programming challenge awaits them — the subject that made them both suffer and fall in love with computers.
 
@@ -36,31 +35,7 @@ In order to enjoy the landscapes and atmosphere of each place without worries, t
 ---
 ## Task 1 - Monaco Grand Prix (20p)
 
-
 ### The Story
-
-The Monaco Grand Prix is a prestigious Formula One race held annually on the Circuit de Monaco street circuit in
-Monaco. First organized in 1929, it is considered one of the most important events in motorsport and is part of the
-Triple Crown alongside the Indianapolis 500 and 24 Hours of Le Mans. Unlike most Formula One races, it does not follow
-the standard 305-kilometre minimum distance rule set by the FIA.
-
-The circuit is famous for its narrow layout, tight corners, elevation changes, and the tunnel, making it one of the
-most technically demanding and dangerous tracks despite relatively low speeds. Safety cars are frequently deployed due
-to accidents and limited overtaking opportunities.
-
-The race joined the Formula One World Championship in 1950 and has since become a symbol of glamour and prestige
-Legendary drivers such as Graham Hill and Ayrton Senna achieved remarkable success here, with Senna holding the record
-for the most victories.
-
-In 2026, the Monaco Grand Prix will take place on June 7, during the Corpus Christi weekend, marking a schedule shift
-from its traditional late May or early June slot. The event remains a highlight of the Formula One calendar worldwide
-motorsport calendar event.
-
-<div align="center">
-    <img title="IDS" alt="IDS" src="./src/images/circuit.PNG" width="1000" height="1900">
-</div>
-
----
 
 Eli and Edi have just arrived in Monte Carlo, the heart of luxury and speed. It's Formula 1 Grand Prix weekend, and the atmosphere is electrifying. While taking Instagram-worthy photos of each other along the famous harbor, they notice a distressed Ferrari engineer staring at a dead screen.
 
@@ -178,36 +153,19 @@ drivers_out_time: 75 83 91 85 79 87 95 95
 
 ### The Story
 
-The labyrinth in the gardens of the Château de Versailles was one of the most fascinating attractions of the royal estate during the reign of Louis XIV. Created in the 17th century by the famous landscaper André Le Nôtre, the labyrinth was conceived not only as a decorative element, but also as an educational and symbolic space. Its winding alleys were delimited by high hedges, which formed a complex and challenging route for visitors.
-
-Inside the labyrinth were numerous fountains decorated with sculptures inspired by the fables of Jean de La Fontaine. Each intersection offered a moral lesson, transforming the walk into an interactive and cultural experience. Visitors, including members of the royal court, were invited to discover the hidden meanings of these stories as they tried to find the way out.
-
-Although extremely popular, the labyrinth was demolished in 1778, as it was considered expensive to maintain. In its place, a simpler English-style garden was created. Today, the labyrinth no longer exists, but it remains an important part of the history and charm of the gardens of Versailles, symbolizing the elegance, complexity and refinement of the French Baroque era.
-
-<div align="center">
-    <img title="IDS" alt="IDS" src="./src/images/versailles.PNG" width="700" height="1000">
-</div>
-
----
-
-## Problem Statement
-
 Currently, the gardens of the Château de Versailles are in the form of a two-dimensional array (a matrix) of characters, dynamically
 allocated. The two adventurers, Eli and Edi, buy entrance tickets, Eli takes a ticket for the palace only, while Edi buys a ticket
-that includes entry to the palace gardens. In this sense, upon completing the guided tour of the palace, Eli goes to the exit of the
-gardens to wait for his boyfriend, while Edi must find the exit and meet his girlfriend, Eli. Since the duo studies computer science,
-they realized that it is much easier to find the solution by coding the following:
+that includes entry to the palace gardens. In this sense, upon completing the guided tour of the palace, Eli goes to the exit of the gardens to wait for her boyfriend, while Edi must find the exit and meet his girlfriend, Eli. Since the duo studies computer science, they realized that it is much easier to find the solution by coding the following:
 
 - Each element in the matrix is ​​associated with a cell of the maze.
-- When the value of an element in the matrix is ​​1 (ASCII code 0x39), that cell is represented by a water channel, and Edi cannot move through it.
+- When the value of an element in the matrix is ​​1 (ASCII code 0x39), that cell is represented by a plant wall, and Edi cannot move through it.
 - When the value of an element in the matrix is ​​0 (ASCII code 0x30), that cell is free, and Edi can move into it.
 
 Edi's position in the maze is represented by cartesian coordinates, a pair (line, column).
-If the maze has m lines and n columns, we will have lines and columns numbered from 0 to m - 1, respectively from 0 to n - 1. Edi will
-always start from the origin, that is, the position (0, 0) and can move to one of the neighboring cells above, below, on the right, or
-on the left. For a simpler mathematical modeling, Edi **cannot** move diagonally.
+If the maze has m lines and n columns, we will have lines and columns numbered from 0 to m - 1, respectively from 0 to n - 1. Edi will always start from the origin, that is, the position (0, 0) and can move to one of the neighboring cells above, below, on the right, or on the left. For a simpler mathematical modeling, Edi **cannot** move diagonally.
+
 The exit from the maze and the reunion with Eli is achieved when Edi manages to reach line m - 1 or column n - 1 of the maze.
-Your goal, as a friend of the unbeatable duo, is to find the line and column to exit the maze.
+Your goal, as a friend of the unbeatable duo, is to find the coordinates of the exit (line & column).
 
 To simplify the task, Eli offers the following guarantees:
 
@@ -250,9 +208,8 @@ current position with the character 1 before moving on.
 
 ---
 
-A dynamically allocated array has the form shown in the figure below.
-Unlike a statically allocated two-dimensional array, in this case we cannot guarantee that successive rows in the array will be placed
-one after the other in memory, but only that each row is contiguous in memory.
+A dynamically allocated 2D array has the form shown in the figure below.
+Unlike a statically allocated two-dimensional array, in this case we cannot guarantee that successive rows in the array will be placed one after the other in memory, but only that each row is contiguous in memory.
 For more details, you can also consult [this section](https://cs-pub-ro.github.io/hardware-software-interface/labs/lab-02/reading/memory-operations.html#reading-pointers) in the lab.
 
 <img title="Dynamic Array" alt="Dynamic Array" src="./src/images/OiDNd.jpg">
@@ -263,15 +220,15 @@ For more details, you can also consult [this section](https://cs-pub-ro.github.i
 
 ### The Story
 
-After their success in Frankfurt, Eli, Edi, and you flew to London. The city welcomed you with its characteristic fog and the iconic sound of a double-decker bus passing by Big Ben. You had plane tickets for the journey home, but there was a problem: all flights had massive delays due to a storm in Northern Europe. The airline needed your help.
+After their success in Versailles, Eli, Edi, and you flew to London. The city welcomed you with its characteristic fog and the iconic sound of a double-decker bus passing by Big Ben. You had plane tickets for the journey home, but there was a problem: all flights had massive delays due to a storm in Northern Europe. The airline needed your help.
 
 "Welcome to Heathrow Airport!" the agent at the desk said. "We need your help with three tasks related to the plane tickets."
 
-First, you had to apply the delays to every ticket. For each flight, you added the delay minutes to both departure and arrival times. If minutes exceeded 59, you carried over to hours. If hours exceeded 23, you carried over to days. Soon, every flight showed the correct new schedule.
+First, you had to apply the delays to every flight. For each flight, you added the delay minutes to both departure and arrival times. If minutes exceeded 59, you carried over to hours. If hours exceeded 23, you carried over to days. Soon, every flight showed the correct new schedule.
 
-Second, the airline wanted to filter passengers with unsuitable luggage. Because of the storm, planes with too light of a load are vulnarable to heavy winds. Take out from the timetable any flights that have a bag weight too low. 
+Second, the airline wanted to filter flights with unsuitable luggage. Because of the storm, planes with too light of a load are vulnarable to heavy winds. Take out from the timetable any flights that have a bag weight too low. 
 
-Finally, it's time to find the best ticket for Eli & Edi's next destinaton. Sort the ticket array in place(first by day, then by hour, then by minute, then by weight, a heavier luggage limit being considered better). Implement whatever sorting algorithm you want. Return the ticket that best fits Eli & Edi's request. Return 1 if there is a flight going to Eli & Edi's wanted destination or 0 if not. 
+Finally, it's time to find the best ticket for Eli & Edi's next destinaton. Sort the flights' ticket array in place(first by day, then by hour, then by minute, then by weight, a heavier luggage limit being considered better). Implement whatever sorting algorithm you want. Return the ticket that best fits Eli & Edi's request. Return 1 if there is a flight going to Eli & Edi's wanted destination or 0 if not. 
 
 The agent thanked you warmly. As you left the airport, the London fog began to lift, revealing a beautiful sunset over the city. Another challenge completed, another city conquered. Your European adventure continued, one assembly task at a time. ✈️
 
@@ -285,7 +242,7 @@ The agent thanked you warmly. As you left the airport, the London fog began to l
 
 ---
 
-You are given an array of structs of type ticket with the following layout:
+You are given an array of structs with the following layout:
 
 | Offset | Size | Field                  | Example      |
 |--------|------|------------------------|--------------|
@@ -344,7 +301,7 @@ The function must be completed in the `subtask1.asm` file.
 
 The airline wants to keep only flights' tickets who have sufficiently heavy luggage. You need to copy into a new array only the tickets that meet the minimum weight requirement.
 
-**Requirement:** Implement the filter_tickets function that receives the original array, a destination array, the number of tickets (passed by pointer), and the minimum luggage weight. The function will copy to the destination array only the tickets with bag_weight >= min_bag_weight and update the ticket count. Update the number of tickets/RDX to reflect the number of elements in the destination array.
+**Requirement:** Implement the filter_tickets function that receives the original array, a final array, the number of tickets (passed by pointer), and the minimum luggage weight. The function will copy to the final array only the tickets with bag_weight >= min_bag_weight and update the count of flights. Update the number of tickets/RDX to reflect the number of elements in the final array.
 
 The function you have to implement has the following header:
 <br>
@@ -357,7 +314,7 @@ The function you have to implement has the following header:
 - `RDI` = address of the original tickets array (struct ticket* origTickets)
 <br>
 
-- `RSI` = address of the destination array (struct ticket* destTickets)
+- `RSI` = address of the final array (struct ticket* destTickets)
 <br>
 
 - `RDX` = address of the integer containing the number of tickets (int* nrTickets)
@@ -369,9 +326,9 @@ The function you have to implement has the following header:
 The function must be completed in the `subtask2.asm` file.
 
 > **Rules** <br>
-> Update the value at address nrTickets with the new count of filtered tickets.
+> Update the value at address nrTickets with the new count of filtered flights.
 
-> Populate the new destination tickets array
+> Populate the new final tickets array
 
 ---
 
@@ -526,7 +483,7 @@ To be able to use your solutions in the implementation of the secret algorithm, 
 
 Simply run ./checker/checker.sh to verify the homework locally. You must upload your zip on moddle for your actual grade (use the make pack rule)
 
-If you wish to verify a certain test from a task, run the checker executable from its directory.
+If you wish to verify a certain test from a task, make and run the checker from its directory.
 
 For example, for verifying test 2 from task 3:
 ./src/task3/checker 2
