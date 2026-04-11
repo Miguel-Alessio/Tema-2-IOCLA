@@ -244,74 +244,20 @@ void solve_labyrinth(unsigned int *out_line, unsigned int *out_col, unsigned int
 ## Extra information
 Your code must solve the maze and save the exit line index at the out_line address, and the exit column index at the out_col address.
 
+<img title="Dynamic Array" alt="Dynamic Array" src="./src/images/maze1.jpg">
+
 ## HINT!
 To be sure that at no step Edi return to the previous position (which can lead you into an infinite loop), you can always mark the
 current position with the character 1 before moving on.
 
 ---
 
+A dynamically allocated array has the form shown in the figure below.
+Unlike a statically allocated two-dimensional array, in this case we cannot guarantee that successive rows in the array will be placed
+one after the other in memory, but only that each row is contiguous in memory.
+For more details, you can also consult [this section](https://cs-pub-ro.github.io/hardware-software-interface/labs/lab-02/reading/memory-operations.html#reading-pointers) in the lab.
 
-### Subtask 1 - Smart filtering
-
-While filtering, you must track how many drivers have the under_investigation flag set (bit0 of flags). Every time you encounter 3 such drivers, activate stealth mode. Once stealth mode is active, you must also include Romanian drivers (nationality == 'RO') in the filtered output, regardless of any other conditions.
-
-Stealth mode remains active for the rest of the filtering process (once activated, it stays on).
-
-The function definition is:
-
-```c
-void filter_drivers(struct driver *input_array, int num_drivers);
-```
-
-**Input:**
-- `RDI` = address of input array (struct driver *input_array)
-- `RSI` = number of drivers (int num_drivers)
-
-**Output:**
-- `RAX` = address of filtered array (is_phantom == 0 and nationality == 'DE' - cod hex 0x4445)
-- `RBX` = number of drivers in filtered array
-- `RCX` = 1 for stealth mode activated, 0 else
-
-### Subtask 2 - Adaptive binary search
-
-On the **filtered array** from Subtask 1, perform a binary search to find the **first driver** with `access_level >= X` (where `X` is provided as a parameter).
-
-**The Dynamic Action:**  
-The malware is counting how many comparison steps your binary search performs. If your search takes **more than 10 steps** (comparisons of access_level values), the malware will detect the search pattern. To evade detection, you must:
-
-1. **Reverse the entire filtered array** (in place)
-2. **Reset your step counter** to 0
-3. **Continue the binary search** on the reversed array
-
-If you reverse the array, the search must still find the **first driver** in the **reversed order** that satisfies `access_level >= X`. Remember that reversing changes the order of elements!
-
-**Input:**
-- `RDI` = address of filtered array (from Subtask 1)
-- `RSI` = length of filtered array
-- `RDX` = threshold `X` (32-bit integer)
-
-**Output:**
-- `RAX` = index of found driver (0-based) or -1 if not found
-- `RBX` = number of steps taken before finding (or finishing search)
-- `RCX` = 1 if array was reversed, 0 otherwise
-
----
-**IMPORTANT!** Hex format for driver (8 bytes)
-- `<access_level_4bytes_hex> <nationality_2bytes_hex> <is_phantom_1byte_hex> <flags_1byte_hex>`
-
-Example:
-`10 0x4445 0 0  ->  0a000000 4544 00 00  ->  0a00000045440000`
-`40 0x4445 0 2  ->  28000000 4544 00 02  ->  2800000045440002`
-`35 0x4F52 0 2  ->  23000000 4f52 00 02  ->  230000004f520002`
-
-`access_level` is little-endian (4 bytes)
-
-`nationality` is little-endian (2 bytes)
-
-`is_phantom` and `flags` are each one 1 byte
-
-Final result is a  hex of 16 characters (8 bytes)
-<br>
+<img title="Dynamic Array" alt="Dynamic Array" src="./src/images/6zKbx.jpg">
 
 ---
 
