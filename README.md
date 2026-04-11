@@ -120,7 +120,7 @@ Traverse the entire array and count how many cars have the error flag set to 1.
 
 ## Subtask 2 – Modify the Array – Fix Corrupted Lap
 
-After counting the errors, generate the fixed lap times in the output array according to these rules:
+After counting the errors, generate the corrected lap times in the output array according to these rules:
 
 - If a driver has `error == 0`, copy its `time` unchanged to the output array..
 - If a driver has `error == 1`, repair its `time` field using the following logic:
@@ -191,7 +191,7 @@ drivers_out_time: [75, 83, 91, 85, 79, 87, 95, 95]
 
 After their heroic rescue of Ferrari's telemetry system in Monaco, Eli and Edi board a flight to Frankfurt, the financial heart of Europe. They plan to relax in the famous Palmengarten gardens, but fate has other plans.
 
-As they exit the airport, Edi's phone rings. It's Klara, a friend from university who now works as a security engineer at **Deutsche Bank**. Her voice is trembling: "The signal processing system for our armored truck fleet has been infected. A malware called 'Phantom Driver' is injecting fake driver profiles into our arrays. Our routing algorithms can't distinguish real drivers from ghosts, and we're losing millions in delayed deliveries!"
+As they exit the airport, Edi's phone rings. It's Klara, a friend from university who now works as a security engineer. Her voice is trembling: "The signal processing system for our armored truck fleet has been infected. A malware called 'Phantom Driver' is injecting fake driver profiles into our arrays. Our routing algorithms can't distinguish real drivers from ghosts, and we're losing millions in delayed deliveries!"
 
 The malware works by inserting driver entries with the `is_phantom` flag set to 1. Worse, it's adaptive – if it detects a simple filter, it changes its injection pattern. Klara needs a program that can:
 
