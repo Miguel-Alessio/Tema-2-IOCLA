@@ -263,9 +263,9 @@ The next subtasks will test your ability to work with arrays of structs in asm. 
 
 #### Context
 
-Due to the storm in Northern Europe, all flights have experienced delays. Each plane ticket contains delayMinutes and delayHours fields indicating the delay for that specific flight. You need to update the departure and arrival times for every ticket.
+Due to the storm in Northern Europe, all flights have experienced delays. Each flight structure contains delayMinutes and delayHours fields indicating the delay for that specific flight. You need to update the departure and arrival times for every flight.
 
-**Requirement:** Implement the apply_delay function that receives an array of flights and their count, and adds the delay to each ticket.
+**Requirement:** Implement the apply_delay function that receives an array of flights and their count, and adds the delay to each flight.
 
 
 You will have to implement the delay algorithm, the function you have to implement has the following header:
@@ -295,7 +295,7 @@ The function must be completed in the `subtask1.asm` file.
 
 ---
 
-## Subtask 2 – Filtering Tickets by Luggage Weight
+## Subtask 2 – Filtering Flights by Luggage Weight
 
 #### Context
 
@@ -332,7 +332,7 @@ The function must be completed in the `subtask2.asm` file.
 
 ---
 
-## Subtask 3 – Sorting and Finding the Best Ticket
+## Subtask 3 – Sorting and Finding the Best Flight
 
 #### Context
 
