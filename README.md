@@ -6,8 +6,8 @@
 
 ---
 
-### DEADLINE SOFT: 30.04.2026
-### DEADLINE HARD: 05.05.2026
+### DEADLINE SOFT: 30.04.2026 23:59
+### DEADLINE HARD: 05.05.2026 23:59
 
 ---
 
@@ -38,6 +38,27 @@ In order to enjoy the landscapes and atmosphere of each place without worries, t
 
 
 ### The Story
+
+The Monaco Grand Prix is a prestigious Formula One race held annually on the Circuit de Monaco street circuit in
+Monaco. First organized in 1929, it is considered one of the most important events in motorsport and is part of the
+Triple Crown alongside the Indianapolis 500 and 24 Hours of Le Mans. Unlike most Formula One races, it does not follow
+the standard 305-kilometre minimum distance rule set by the FIA.
+
+The circuit is famous for its narrow layout, tight corners, elevation changes, and the tunnel, making it one of the
+most technically demanding and dangerous tracks despite relatively low speeds. Safety cars are frequently deployed due
+to accidents and limited overtaking opportunities.
+
+The race joined the Formula One World Championship in 1950 and has since become a symbol of glamour and prestige
+Legendary drivers such as Graham Hill and Ayrton Senna achieved remarkable success here, with Senna holding the record
+for the most victories.
+
+In 2026, the Monaco Grand Prix will take place on June 7, during the Corpus Christi weekend, marking a schedule shift
+from its traditional late May or early June slot. The event remains a highlight of the Formula One calendar worldwide
+motorsport calendar event.
+
+<div align="center">
+    <img title="IDS" alt="IDS" src="./src/images/circuit.png" width="1000" height="1900">
+</div>
 
 Eli and Edi have just arrived in Monte Carlo, the heart of luxury and speed. It's Formula 1 Grand Prix weekend, and the atmosphere is electrifying. While taking Instagram-worthy photos of each other along the famous harbor, they notice a distressed Ferrari engineer staring at a dead screen.
 
@@ -111,11 +132,11 @@ After counting the errors, generate the corrected lap times in the output array 
 
 **Example:**
 
-Input:
+For a given input:
 ```c
-num_drivers = 8
-drivers_in_time: [75, 82, 91, 68, 79, 88, 95, 73]
-errors:         [ 0,  1,  0,  1,  0,  1,  0,  1]
+num_drivers =      8
+drivers_in_time:  75 82 91 68 79 88 95 73
+errors:            0  1  0  1  0  1  0  1
 ```
 Processing:
 
@@ -137,8 +158,8 @@ Index 7: error=1, last → copy previous = 95
 
 Output:
 ```c
-error_count = 4
-drivers_out_time: [75, 83, 91, 85, 79, 87, 95, 95]
+error_count =       4
+drivers_out_time: 75 83 91 85 79 87 95 95
 ```
 ---
 
@@ -150,7 +171,7 @@ drivers_out_time: [75, 83, 91, 85, 79, 87, 95, 95]
 
 ---
 
-## Task 2 - The Royal Labyrinth of Versailles: A Garden of Mythological Enigmas (25p)
+## Task 2 - The Royal Labyrinth of Versailles (25p)
 
 
 ### The Story
@@ -198,12 +219,21 @@ The function definition is:
 ```c
 void solve_labyrinth(unsigned int *out_line, unsigned int *out_col, unsigned int m, unsigned int n, char **maze);
 ```
-**Input:**
+
 - `out_line` = pointer to the line index corresponding to the box through which Edi exits the maze
 - `out_col` = pointer to the column index corresponding to the box through which Edi exits the maze
 - `m` = the number of lines in the maze
 - `n` = the number of columns in the maze
 - `maze` = the two-dimensional array, dynamically allocated, containing the representation of the maze
+
+**Input:**
+- `RDX` = number of lines in the maze
+- `RCX` = number of columns in the maze
+- `R8`  = pointer to the 2D array of characters (char**) - an array of pointers to strings
+
+**Output:**
+- `RDI` = pointer to an unsigned int where the exit line index will be stored
+- `RSI` = pointer to an unsigned int where the exit column index will be stored
 
 ---
 
