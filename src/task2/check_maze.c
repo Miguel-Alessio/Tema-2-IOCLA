@@ -10,7 +10,7 @@ typedef struct position {
 
 
 void solve_labyrinth(unsigned int *out_line, unsigned int *out_col,
-                        unsigned int m, unsigned int n, char **labyrinth);
+                        unsigned int m, unsigned int n, char **maze);
 
 
 void read_test(unsigned int test_no, char ***a, 
@@ -61,7 +61,7 @@ void check_result(int test_no, Position *sol, double *score) {
 
     if (correct_solution.line == sol->line 
         && correct_solution.col == sol->col) {
-        printf("Test %d.................PASSED: %dp\n", test_no, 2.5);
+        printf("Test %d.................PASSED: %fp\n", test_no, 2.5);
         *score += 2.5;
     } else {
         printf("Test %d.................FAILED: %dp\n", test_no, 0);
@@ -93,7 +93,7 @@ int main() {
 
         free_test(m, a);
     }
-    printf("\nTASK 4 SCORE: %.2f / 25.00\n\n", score);
+    printf("\nTASK 2 SCORE: %.2f / 25.00\n\n", score);
 
 
     return 0;
