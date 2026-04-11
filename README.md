@@ -189,25 +189,14 @@ drivers_out_time: [75, 83, 91, 85, 79, 87, 95, 95]
 
 ### The Story
 
-After their heroic rescue of Ferrari's telemetry system in Monaco, Eli and Edi board a flight to Frankfurt, the financial heart of Europe. They plan to relax in the famous Palmengarten gardens, but fate has other plans.
+The labyrinth in the gardens of the Château de Versailles was one of the most fascinating attractions of the royal estate during the reign of Louis XIV. Created in the 17th century by the famous landscaper André Le Nôtre, the labyrinth was conceived not only as a decorative element, but also as an educational and symbolic space. Its winding alleys were delimited by high hedges, which formed a complex and challenging route for visitors.
 
-As they exit the airport, Edi's phone rings. It's Klara, a friend from university who now works as a security engineer. Her voice is trembling: "The signal processing system for our armored truck fleet has been infected. A malware called 'Phantom Driver' is injecting fake driver profiles into our arrays. Our routing algorithms can't distinguish real drivers from ghosts, and we're losing millions in delayed deliveries!"
+Inside the labyrinth were numerous fountains decorated with sculptures inspired by the fables of Jean de La Fontaine. Each intersection offered a moral lesson, transforming the walk into an interactive and cultural experience. Visitors, including members of the royal court, were invited to discover the hidden meanings of these stories as they tried to find the way out.
 
-The malware works by inserting driver entries with the `is_phantom` flag set to 1. Worse, it's adaptive – if it detects a simple filter, it changes its injection pattern. Klara needs a program that can:
-
-1. Filter real German drivers from the massive dataset
-2. Intelligently search for drivers with suspicious access levels
-
-But here's the catch – the malware is actively monitoring memory access patterns. If it detects a standard algorithm, it will trigger a system-wide lockout. Eli and Edi must write code that **changes behavior dynamically** based on what it finds during execution.
-
-"This is like a chess match against an AI," Edi whispers. "We need to adapt our strategy in real-time."
-
-Klara uploads the assembly skeleton to their laptops. "The system only accepts raw x86-64 code. No C, no standard library. You have 15 minutes before the next attack wave."
-
-Eli looks at you, their trusted coding partner. "Ready for some cyber chess?"
+Although extremely popular, the labyrinth was demolished in 1778, as it was considered expensive to maintain. In its place, a simpler English-style garden was created. Today, the labyrinth no longer exists, but it remains an important part of the history and charm of the gardens of Versailles, symbolizing the elegance, complexity and refinement of the French Baroque era.
 
 <div align="center">
-    <img title="IDS" alt="IDS" src="./src/images/frankfurt.jpeg" width="700" height="1000">
+    <img title="IDS" alt="IDS" src="./src/images/versailles.jpeg" width="700" height="1000">
 </div>
 
 ---
