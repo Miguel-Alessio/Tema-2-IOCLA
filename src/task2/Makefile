@@ -1,30 +1,22 @@
-CC = gcc
-ASM = nasm
+.PHONY: all clean run build
 
-CFLAGS = -Wall -g -Wpointer-arith
-ASMFLAGS = -f elf64 -g
-LDFLAGS =
+all: checker
 
-TARGET_EXEC = checker
+build: checker
 
-C_SRCS = $(wildcard *.c)
-ASM_SRCS = $(wildcard *.asm)
+run: checker
+	./checker
 
-C_OBJS = $(C_SRCS:.c=.o)
-ASM_OBJS = $(ASM_SRCS:.asm=.o)
+maze.o: maze.asm
+	nasm -f elf $^ -o $@
 
-OBJS = $(C_OBJS) $(ASM_OBJS)
+check_maze.o: check_maze.c
+	gcc -c -g -m32 -no-pie $^ -o $@
 
-$(TARGET_EXEC): $(OBJS)
-	$(CC) $(OBJS) -o $@ $(LDFLAGS)
-
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
-%.o: %.asm
-	$(ASM) $(ASMFLAGS) $< -o $@
-
-.PHONY: clean
+checker: check_maze.o  maze.o
+	gcc -m32 -g -no-pie $^ -o $@
+	rm *.o
 
 clean:
-	$(RM) *.o *.d $(TARGET_EXEC)
+	rm -f checker
+	rm -f output/maze_*
