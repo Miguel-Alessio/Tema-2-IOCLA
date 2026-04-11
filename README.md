@@ -203,16 +203,50 @@ Although extremely popular, the labyrinth was demolished in 1778, as it was cons
 
 ## Problem Statement
 
-You are given an array of driver structures (size 8 bytes each) with the following layout:
+Currently, the gardens of the Château de Versailles are in the form of a two-dimensional array (a matrix) of characters, dynamically
+allocated. The two adventurers, Eli and Edi, buy entrance tickets, Eli takes a ticket for the palace only, while Edi buys a ticket
+that includes entry to the palace gardens. In this sense, upon completing the guided tour of the palace, Eli goes to the exit of the
+gardens to wait for his boyfriend, while Edi must find the exit and meet his girlfriend, Eli. Since the duo studies computer science,
+they realized that it is much easier to find the solution by coding the following:
 
-| Offset | Size | Field | Description |
-|--------|------|-------|-------------|
-| 0      | 4    | access_level | Security access level (0-100, higher = more access) |
-| 4      | 2    | nationality | Country code: 'DE'=0x4445, 'RO'=0x4F52, 'UK'=0x4B55, 'FR'=0x5246 |
-| 6      | 1    | is_phantom | 1 = malware-created driver, 0 = real driver |
-| 7      | 1    | flags | Bit flags: bit0 = under_investigation, bit1 = priority_clearance |
+- Each element in the matrix is ​​associated with a cell of the maze.
+- When the value of an element in the matrix is ​​1 (ASCII code 0x39), that cell is represented by a water channel, and Edi cannot move through it.
+- When the value of an element in the matrix is ​​0 (ASCII code 0x30), that cell is free, and Edi can move into it.
 
-Your mission is to process this array and actively defend against the malware's adaptive behavior.
+Edi's position in the maze is represented by cartesian coordinates, a pair (line, column).
+If the maze has m lines and n columns, we will have lines and columns numbered from 0 to m - 1, respectively from 0 to n - 1. Edi will
+always start from the origin, that is, the position (0, 0) and can move to one of the neighboring cells above, below, on the right, or
+on the left. For a simpler mathematical modeling, Edi **cannot** move diagonally.
+The exit from the maze and the reunion with Eli is achieved when Edi manages to reach line m - 1 or column n - 1 of the maze.
+Your goal, as a friend of the unbeatable duo, is to find the line and column to exit the maze.
+
+To simplify the task, Eli offers the following guarantees:
+
+From each current position, Edi can only access the previous position (something that must be avoided, so as not to go back on the
+road) and a single future position, the rest of the neighboring boxes being occupied by walls formed by plants.
+
+To solve the maze, the famous landscape architect André Le Nôtre will ensure that there is only one correct solution.
+
+The function definition is:
+
+```c
+void solve_labyrinth(unsigned int *out_line, unsigned int *out_col, unsigned int m, unsigned int n, char **maze);
+```
+**Input:**
+- `out_line` = pointer to the line index corresponding to the box through which Edi exits the maze
+- `out_col` = pointer to the column index corresponding to the box through which Edi exits the maze
+- `m` = the number of lines in the maze
+- `n` = the number of columns in the maze
+- `maze` = the two-dimensional array, dynamically allocated, containing the representation of the maze
+
+---
+
+## Extra information
+Your code must solve the maze and save the exit line index at the out_line address, and the exit column index at the out_col address.
+
+## HINT!
+To be sure that at no step Edi return to the previous position (which can lead you into an infinite loop), you can always mark the
+current position with the character 1 before moving on.
 
 ---
 
