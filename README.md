@@ -135,7 +135,7 @@ Index 7: error=1, last → copy previous = 95
 
 Output:
 ```c
-error_count =       4
+error_count =      4
 drivers_out_time: 75 83 91 85 79 87 95 95
 ```
 ---
@@ -213,6 +213,50 @@ Unlike a statically allocated two-dimensional array, in this case we cannot guar
 For more details, you can also consult [this section](https://cs-pub-ro.github.io/hardware-software-interface/labs/lab-02/reading/memory-operations.html#reading-pointers) in the lab.
 
 <img title="Dynamic Array" alt="Dynamic Array" src="./src/images/OiDNd.jpg">
+
+---
+
+## Constraints
+
+### Matrix Dimensions
+- 1 ≤ m ≤ 1,000
+- 1 ≤ n ≤ 1,000
+
+### Maze Cell Values
+- Cell value: 0 or 1 (ASCII '0' or '1')
+- 0 = free path (walkable)
+- 1 = plant wall (blocked)
+
+### Start Position
+- Start cell: (0,0)
+- Start cell value: must be 0
+
+### Exit Condition
+- Exit reached when: row = m-1 **OR** column = n-1
+- Exit cell value: must be 0
+- Exit cell coordinates: 0 ≤ out_line ≤ m-1, 0 ≤ out_col ≤ n-1
+
+### Degree Constraints
+- Start cell degree: exactly 1
+- Exit cell degree: exactly 1
+- All other path cells degree: exactly 2
+- Non-path cells: degree 0 (walls)
+
+### Solution Uniqueness
+- Number of valid solutions: exactly 1
+- No branching paths
+- No cycles in the path
+- No dead ends except at the official exit
+
+### Movement Constraints
+- Directions allowed: up, down, left, right
+- Diagonal movement: not allowed
+- Valid move target: cell value must be 0
+
+## Memory Constraints
+- `maze`: valid pointer to array of m strings
+- Each string length: n + 1 (including null terminator)
+- Memory allocation: dynamic (provided by caller)
 
 ---
 
