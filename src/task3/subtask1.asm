@@ -1,21 +1,16 @@
 ; write the structures. make sure it fits the layour in the README
-; struc date
-; 		???
-; endstruct
-
-; struct ticket
-; 		???
+; struct flight
+; 		TODO
 ; endstruct
 
 section .text
-
+;; DO NOT MODIFY
 global apply_delay
 
-; void apply_delay(struct ticket* tickets, int nrTickets)
-; rdi = struct ticket *tickets
-; rsi = int nrTickets
+; void apply_delay(struct flight* flights, int nrFlights)
+; rdi = struct flight *flightss
+; rsi = int nrFlights
 apply_delay:
-	;; DO NOT MODIFY
 	push rbp
 	mov rbp, rsp
 	push rbx
