@@ -1,10 +1,10 @@
 section .text
 
+;; DO NOT MODIFY
 global fix_lap_times
 
 
 fix_lap_times:
-    ;; DO NOT MODIFY
     push rbp
     mov rbp, rsp
     push rbx
