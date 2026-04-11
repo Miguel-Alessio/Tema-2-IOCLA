@@ -7,7 +7,7 @@ ROOT_DIR="$(dirname "$SCRIPT_DIR")"
 cd "$ROOT_DIR" || { echo -e "Can't find root folder!"; exit 1; }
 
 # add task1 & task2 when the checkers are implemented
-TASKS=("task3" "task4")
+TASKS=("task1" "task3" "task4")
 
 for TASK in "${TASKS[@]}"; do
     if [ -d "src/$TASK" ]; then
@@ -26,6 +26,48 @@ for TASK in "${TASKS[@]}"; do
 done
 
 TOTAL_SCORE=0
+
+echo "----------------------------- TASK 1 ------------------------------"
+TASK1_SCORE=0
+NUM_TESTS=5
+POINTS_PER_TEST=4
+
+# move to task dir
+cd src/task1
+# make output dir
+mkdir -p output
+
+# make sure you keep the exec name "checker"
+if [ ! -f "./checker" ]; then
+    echo -e "Executable not found\n"
+else
+    for (( i=1; i<=NUM_TESTS; i++ ))
+    do
+        # timeout in case of infinite loop
+        timeout 2s ./checker $i > /dev/null 2>&1
+        EXIT_CODE=$?
+
+        if [ $EXIT_CODE -eq 0 ]; then
+            printf "Test %d---------------------------------------------------PASSED: %dp\n" $i $POINTS_PER_TEST
+            TASK1_SCORE=$((TASK1_SCORE + POINTS_PER_TEST))
+        elif [ $EXIT_CODE -eq 124 ]; then
+            printf "Test %d--------------------------------------FAILED (Time Limit): 0p\n" $i
+        elif [ $EXIT_CODE -eq 139 ]; then
+            printf "Test %d--------------------------------------FAILED (Seg  Fault): 0p\n" $i
+        else
+            printf "Test %d--------------------------------------FAILED (Wrong  Ans): 0p\n" $i
+        fi
+    done
+fi
+
+TOTAL_SCORE=$((TOTAL_SCORE + TASK1_SCORE))
+printf -- "---------------------- TASK 1 SCORE: %d/20 ----------------------\n\n" $TASK1_SCORE
+
+# clean
+make clean > /dev/null 2>&1
+
+# return to root dir
+cd ../../
 
 echo "----------------------------- TASK 3 ------------------------------"
 TASK3_SCORE=0
