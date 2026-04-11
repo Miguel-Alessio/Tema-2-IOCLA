@@ -284,8 +284,6 @@ The agent thanked you warmly. As you left the airport, the London fog began to l
 
 ## Problem statement
 
----
-
 You are given an array of structs with the following layout:
 
 | Offset | Size | Field                  | Example      |
@@ -337,6 +335,10 @@ The function must be completed in the `subtask1.asm` file.
 
 > All flights will still be in the same month, even after applying delays
 
+## Constraints
+
+- 1 ≤ `nrFlights` ≤ 100
+
 ---
 
 ## Subtask 2 – Filtering Flights by Luggage Weight
@@ -373,6 +375,11 @@ The function must be completed in the `subtask2.asm` file.
 > Update the value at address nrFlights with the new count of filtered flights.
 
 > Populate the new final flights array
+
+## Constraints
+
+- 1 ≤ `nrFlights` ≤ 100
+- 1 ≤ `min_bag_weight` ≤ 100
 
 ---
 
@@ -418,10 +425,10 @@ The function must be completed in the `subtask3.asm` file.
 
 - `RDX` = address of the structure that will hold the found ticket, else leave it NULL
 
-> Notes: 
+## Constraints
 
+- 1 ≤ `nrFlights` ≤ 100
 - The destination string will at most be 32 bytes (including the terminator)
-
 
 ## Task 4 - Sudoku (20p)
 
@@ -503,8 +510,11 @@ Being given the array, its size and a certain box, verify if the box respects Su
 
 ---
 
-## Extra information
-As the matrix will be indexed starting from 0, so will the rows/columns/boxes. Thus, rdx will hold values from 0 to (array_size - 1)
+## Constraints
+
+- the matrix and rows/columns/boxes will be indexed starting from 0
+- 0 ≤ RDX ≤ array_size - 1
+- board size will be 4, 9 or 16
 
 ## HINT!
 Here is a basic way of checking if a sudoku line/row/box is valid:
