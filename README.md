@@ -222,13 +222,13 @@ For more details, you can also consult [this section](https://cs-pub-ro.github.i
 
 After their success in Versailles, Eli, Edi, and you flew to London. The city welcomed you with its characteristic fog and the iconic sound of a double-decker bus passing by Big Ben. You had plane tickets for the journey home, but there was a problem: all flights had massive delays due to a storm in Northern Europe. The airline needed your help.
 
-"Welcome to Heathrow Airport!" the agent at the desk said. "We need your help with three tasks related to the plane tickets."
+"Welcome to Heathrow Airport!" the agent at the desk said. "We need your help with three tasks related to the timetables."
 
-First, you had to apply the delays to every flight. For each flight, you added the delay minutes to both departure and arrival times. If minutes exceeded 59, you carried over to hours. If hours exceeded 23, you carried over to days. Soon, every flight showed the correct new schedule.
+First, you had to apply the delays to every flight. For each flight, you added the delay minutes to both departure and arrival times. If minutes exceeded 59, you carried over to hours. If hours exceeded 23, you carried over to days. And the same for hours. Soon, every flight showed the correct new schedule.
 
 Second, the airline wanted to filter flights with unsuitable luggage. Because of the storm, planes with too light of a load are vulnarable to heavy winds. Take out from the timetable any flights that have a bag weight too low. 
 
-Finally, it's time to find the best ticket for Eli & Edi's next destinaton. Sort the flights' ticket array in place(first by day, then by hour, then by minute, then by weight, a heavier luggage limit being considered better). Implement whatever sorting algorithm you want. Return the ticket that best fits Eli & Edi's request. Return 1 if there is a flight going to Eli & Edi's wanted destination or 0 if not. 
+Finally, it's time to find the best flight for Eli & Edi's next destinaton. Sort the flights' array in place(first by day, then by hour, then by minute, then by weight, a heavier luggage limit being considered better). Implement whatever sorting algorithm you want. Return the flight that best fits Eli & Edi's request. Return 1 if there is a flight going to Eli & Edi's wanted destination or 0 if not. 
 
 The agent thanked you warmly. As you left the airport, the London fog began to lift, revealing a beautiful sunset over the city. Another challenge completed, another city conquered. Your European adventure continued, one assembly task at a time. ✈️
 
@@ -265,27 +265,27 @@ The next subtasks will test your ability to work with arrays of structs in asm. 
 
 Due to the storm in Northern Europe, all flights have experienced delays. Each plane ticket contains delayMinutes and delayHours fields indicating the delay for that specific flight. You need to update the departure and arrival times for every ticket.
 
-**Requirement:** Implement the apply_delay function that receives an array of tickets and their count, and adds the delay to each ticket.
+**Requirement:** Implement the apply_delay function that receives an array of flights and their count, and adds the delay to each ticket.
 
 
 You will have to implement the delay algorithm, the function you have to implement has the following header:
 <br>
 ```c
-        void apply_delay(struct ticket* tickets, int nrTickets);
+        void apply_delay(struct flight* flights, int nrFlights);
 ```
 <br>
 
-- `RDI` = address of the tickets array (struct ticket* tickets)
+- `RDI` = address of the flights array (struct flight* flights)
 
-- `RSI` = number of tickets (int nrTickets)
+- `RSI` = number of flights (int nrFlights)
 <br>
 
 The function must be completed in the `subtask1.asm` file.
 
 > **Other details** <br>
-> You must write your own structures defined in the README (struc date and struc ticket).
+> You must write your own structures defined in the README (struc flight and any other helpful structs).
 
-> The size of a ticket is ticket_size (42 bytes).
+> The size of a flight is flught_size (42 bytes).
 
 > The delayMinutes and delayHours fields are located at the end of the structure.
 
@@ -299,25 +299,25 @@ The function must be completed in the `subtask1.asm` file.
 
 #### Context
 
-The airline wants to keep only flights' tickets who have sufficiently heavy luggage. You need to copy into a new array only the tickets that meet the minimum weight requirement.
+The airline wants to keep only flights which have sufficiently heavy luggage. You need to copy into a new array only the flights that meet the minimum weight requirement.
 
-**Requirement:** Implement the filter_tickets function that receives the original array, a final array, the number of tickets (passed by pointer), and the minimum luggage weight. The function will copy to the final array only the tickets with bag_weight >= min_bag_weight and update the count of flights. Update the number of tickets/RDX to reflect the number of elements in the final array.
+**Requirement:** Implement the filter_flights function that receives the original array, a final array, the number of flights (passed by pointer), and the minimum luggage weight. The function will copy to the final array only the flights with bag_weight >= min_bag_weight and update the count of flights. Update the number of flights (RDX) to reflect the number of elements in the final array.
 
 The function you have to implement has the following header:
 <br>
 ```c
-        void filter_tickets(struct ticket* origTickets, struct ticket* destTickets, int* nrTickets, int min_bag_weight);
+        void filter_flights(struct flight* origFlights, struct flight* finalFlights, int* nrFlights, int min_bag_weight);
 ```
 
 <br>
 
-- `RDI` = address of the original tickets array (struct ticket* origTickets)
+- `RDI` = address of the original Flights array (struct flight* origFlights)
 <br>
 
-- `RSI` = address of the final array (struct ticket* destTickets)
+- `RSI` = address of the final array (struct flight* finalFlights)
 <br>
 
-- `RDX` = address of the integer containing the number of tickets (int* nrTickets)
+- `RDX` = address of the integer containing the number of flights (int* nrFlights)
 <br>
 
 - `RCX` = minimum luggage weight (int min_bag_weight)
@@ -326,9 +326,9 @@ The function you have to implement has the following header:
 The function must be completed in the `subtask2.asm` file.
 
 > **Rules** <br>
-> Update the value at address nrTickets with the new count of filtered flights.
+> Update the value at address nrFlights with the new count of filtered flights.
 
-> Populate the new final tickets array
+> Populate the new final flights array
 
 ---
 
@@ -336,21 +336,21 @@ The function must be completed in the `subtask2.asm` file.
 
 #### Context
 
-You must first sort all tickets by arrival time (earliest is best). In case of a tie, the ticket with heavier luggage is considered better. Then, you need to search for the first ticket matching the requested destination and return it.
+You must first sort all flights by arrival time (earliest is best). In case of a tie, the flight with heavier luggage is considered better. Then, you need to search for the first flight matching the requested destination and return it.
 
 The function you have to implement has the following header:
 <br>
 ```c
-        int sort_and_return(struct ticket* tickets, int nrTickets, struct ticket* bestTicket, char* destination);
+        int sort_and_return(struct flight* flights, int nrFlights, struct flight* bestFlight, char* destination);
 ```
 <br>
 
-- `RDI` = address of the tickets array (struct ticket* tickets)
+- `RDI` = address of the flights array (struct flight* flights)
 
-- `RSI` = number of tickets (int nrTickets)
+- `RSI` = number of flights (int nrFlights)
 <br>
 
-- `RDX` = address of the structure where the found ticket will be copied (struct ticket* bestTicket)
+- `RDX` = address of the structure where the found flight will be copied (struct flight* bestFlight)
 <br>
 
 - `RCX` =  address of the string representing the searched destination (char* destination)
@@ -358,21 +358,21 @@ The function you have to implement has the following header:
 The function must be completed in the `subtask3.asm` file.
 
 > **Rules** <br>
-> Sorting rules (descending priority - smaller = better for times):
+> Sorting rules:
 
 - Compare days (smaller day = earlier = better)
-- If days are equal, compare arrivingTime.hour
-- If hours are equal, compare arrivingTime.minute
+- If days are equal, compare arrivingTime.hour (smaller hour = earlier = better)
+- If hours are equal, compare arrivingTime.minute (smaller minute = earlier = better)
 - If minutes are also equal, compare bag_weight (larger = better)
-- Only compare the arriving values, Eli & Edi don't care about the departing times for this task
+- Only compare the arriving values, Eli & Edi don't care about the departing times
 
 > Return values:
 
-- `RAX` = 1 if a ticket with the requested destination was found
+- `RAX` = 1 if a flight with the requested destination was found
 
-- `RAX` = 0 if no ticket with the requested destination exists
+- `RAX` = 0 if no flight with the requested destination exists
 
-- `RDX` = address of the structure that will hold the found ticket
+- `RDX` = address of the structure that will hold the found ticket, else leave it NULL
 
 > Notes: 
 
