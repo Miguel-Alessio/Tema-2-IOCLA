@@ -257,7 +257,7 @@ Unlike a statically allocated two-dimensional array, in this case we cannot guar
 one after the other in memory, but only that each row is contiguous in memory.
 For more details, you can also consult [this section](https://cs-pub-ro.github.io/hardware-software-interface/labs/lab-02/reading/memory-operations.html#reading-pointers) in the lab.
 
-<img title="Dynamic Array" alt="Dynamic Array" src="./src/images/6zKbx.jpg">
+<img title="Dynamic Array" alt="Dynamic Array" src="./src/images/OiDNd.jpg">
 
 ---
 
