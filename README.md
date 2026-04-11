@@ -184,7 +184,7 @@ drivers_out_time: [75, 83, 91, 85, 79, 87, 95, 95]
 
 ---
 
-## Task 2 - Frankfurt: Phantom Driver Cyber Attack (25p)
+## Task 2 - The Royal Labyrinth of Versailles: A Garden of Mythological Enigmas (25p)
 
 
 ### The Story
