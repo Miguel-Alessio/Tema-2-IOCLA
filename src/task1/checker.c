@@ -24,13 +24,12 @@ void readInput(char *filename, unsigned int *in_times, char *errors, int *ptr_n)
 	fclose(input);
 }
 
-void readRef(char *filename, unsigned int *ref_times, int *ptr_ref_n, int *ptr_ref_error_count)
+void readRef(char *filename, int nr_drivers, unsigned int *ref_times, int *ptr_ref_error_count)
 {
 	FILE *ref = fopen(filename, "r");
 
-	fscanf(ref, "%d", ptr_ref_n);
 	fscanf(ref, "%d", ptr_ref_error_count);
-	for (int i = 0; i < (*ptr_ref_n); ++i) {
+	for (int i = 0; i < nr_drivers; ++i) {
 		fscanf(ref, "%u", &ref_times[i]);
 	}
 	
@@ -55,14 +54,14 @@ void printOutput(char *filename, unsigned int *out_times, int out_n, int error_c
 	fclose(output);
 }
 
-int check(unsigned int *out_times, int out_n, unsigned int *ref_times, 
-          int ref_n, int error_count, int ref_error_count)
+int check(int nr_drivers, unsigned int *out_times, unsigned int *ref_times, 
+          int out_error_count, int ref_error_count)
 {
-	if (out_n != ref_n || error_count != ref_error_count) {
+	if (out_error_count != ref_error_count) {
 		return 0;
 	}
 
-	for (int i = 0; i < out_n; ++i) {
+	for (int i = 0; i < nr_drivers; ++i) {
 		if (out_times[i] != ref_times[i]) {
 			return 0;
 		}
@@ -90,14 +89,14 @@ int main(int argc, char **argv)
 		sprintf(ref_file, "./ref/monaco%d.ref", i + 1);
 
 		readInput(input_file, in_times, errors, &num_drivers);
-		readRef(ref_file, ref_times, &ref_n, &ref_error_count);
+		readRef(ref_file, num_drivers, ref_times, &ref_error_count);
 
 		fix_lap_times(in_times, errors, num_drivers, out_times, &error_count);
 
 		sprintf(output_file, "./output/monaco%d.out", i + 1);
 		printOutput(output_file, out_times, num_drivers, error_count);
-
-		if (check(out_times, num_drivers, ref_times, ref_n, error_count, ref_error_count)) {
+		
+		if (check(num_drivers, out_times, ref_times, error_count, ref_error_count)) {
 			printf("Test %02d.................PASSED: %.1fp\n", i + 1, 2.0);
 			score += 2.0;
 		}
