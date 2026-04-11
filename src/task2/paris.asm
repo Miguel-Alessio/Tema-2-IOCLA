@@ -1,14 +1,15 @@
 extern printf
 extern position
-global solve_labyrinth
+
 
 ; you can declare any helper variables in .data or .bss
 
 section .text
 
+;; DO NOT MODIFY
+global solve_labyrinth
 
 solve_labyrinth:
-    ;; DO NOT MODIFY
     push    rbp
     mov     rbp, rsp
     push    rbx
