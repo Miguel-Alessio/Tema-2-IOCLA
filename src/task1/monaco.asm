@@ -13,13 +13,11 @@ fix_lap_times:
     push r14
     push r15
     ;; DO NOT MODIFY
-   
     ;; YOUR CODE STARTS HERE
-    
-    
-    
-    ;; YOUR CODE ENDS HERE
 
+
+
+    ;; YOUR CODE ENDS HERE
     ;; DO NOT MODIFY
     pop r15
     pop r14

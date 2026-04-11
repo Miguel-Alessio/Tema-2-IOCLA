@@ -27,7 +27,7 @@ The unbeatable duo from homework 1 continues their adventure in topic 2, only th
 
 After an academic year full of exams, assignments, and projects, they decided to celebrate their success with a memorable vacation through the great cities of Europe. Although they are excited about the adventure, they know that in each destination an assembly programming challenge awaits them — the subject that made them both suffer and fall in love with computers.
 
-In order to enjoy the landscapes and atmosphere of each place without worries, they need your help. So, from now on, throughout the journey, the two friends will become Elisa (Eli) and Eduard (Edi) for you, and you will be their traveling partner on this European adventure.
+In order to enjoy the landscapes and atmosphere of each place without worries, they need your help. So, from now on you will be helping them through their European adventure by solving various assembly problems.
 
 <div align="center">
     <img title="IDS" alt="IDS" src="./src/images/airport.png" width="1000" height="1900">

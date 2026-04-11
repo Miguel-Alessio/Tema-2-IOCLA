@@ -7,7 +7,7 @@ ROOT_DIR="$(dirname "$SCRIPT_DIR")"
 cd "$ROOT_DIR" || { echo -e "Can't find root folder!"; exit 1; }
 
 # add task1 & task2 when the checkers are implemented
-TASKS=("task1" "task3" "task4")
+TASKS=("task1" "task2" "task3" "task4")
 
 for TASK in "${TASKS[@]}"; do
     if [ -d "src/$TASK" ]; then
@@ -61,7 +61,7 @@ else
 fi
 
 TOTAL_SCORE=$((TOTAL_SCORE + TASK1_SCORE))
-printf -- "---------------------- TASK 1 SCORE: %d/20 ----------------------\n\n" $TASK1_SCORE
+printf -- "----------------------- TASK 1 SCORE: %d/20 ------------------------\n\n" $TASK1_SCORE
 
 # clean
 make clean > /dev/null 2>&1
@@ -70,12 +70,12 @@ make clean > /dev/null 2>&1
 cd ../../
 
 echo "----------------------------- TASK 2 ------------------------------"
-TASK1_SCORE=0
+TASK2_SCORE=0
 NUM_TESTS=5
 POINTS_PER_TEST=5
 
 # move to task dir
-cd src/task1
+cd src/task2
 # make output dir
 mkdir -p output
 
@@ -91,7 +91,7 @@ else
 
         if [ $EXIT_CODE -eq 0 ]; then
             printf "Test %d---------------------------------------------------PASSED: %dp\n" $i $POINTS_PER_TEST
-            TASK1_SCORE=$((TASK1_SCORE + POINTS_PER_TEST))
+            TASK2_SCORE=$((TASK2_SCORE + POINTS_PER_TEST))
         elif [ $EXIT_CODE -eq 124 ]; then
             printf "Test %d--------------------------------------FAILED (Time Limit): 0p\n" $i
         elif [ $EXIT_CODE -eq 139 ]; then
@@ -103,7 +103,7 @@ else
 fi
 
 TOTAL_SCORE=$((TOTAL_SCORE + TASK2_SCORE))
-printf -- "---------------------- TASK 1 SCORE: %d/25 ----------------------\n\n" $TASK2_SCORE
+printf -- "----------------------- TASK 2 SCORE: %d/25 ------------------------\n\n" $TASK2_SCORE
 
 # clean
 make clean > /dev/null 2>&1
@@ -145,7 +145,7 @@ else
 fi
 
 TOTAL_SCORE=$((TOTAL_SCORE + TASK3_SCORE))
-printf -- "---------------------- TASK 3 SCORE: %d/25 ----------------------\n\n" $TASK3_SCORE
+printf -- "----------------------- TASK 3 SCORE: %d/25 ------------------------\n\n" $TASK3_SCORE
 
 # clean
 make clean > /dev/null 2>&1
@@ -153,7 +153,7 @@ make clean > /dev/null 2>&1
 # return to root dir
 cd ../../
 
-echo "---------------------------- TASK 4 -----------------------------"
+echo "---------------------------- TASK 4 -------------------------------"
 TASK4_SCORE=0
 NUM_TESTS=5
 POINTS_PER_TEST=4
@@ -182,7 +182,7 @@ else
     done
 fi
 TOTAL_SCORE=$((TOTAL_SCORE + TASK4_SCORE))
-printf -- "---------------------- TASK 4 SCORE: %d/20 ----------------------\n\n" $TASK4_SCORE
+printf -- "----------------------- TASK 4 SCORE: %d/20 ------------------------\n\n" $TASK4_SCORE
 
 make clean > /dev/null 2>&1
 cd ../../

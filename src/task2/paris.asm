@@ -23,13 +23,11 @@ solve_labyrinth:
     mov     r15, rcx
     mov     rbx, r8
     ;; DO NOT MODIFY
-   
     ;; YOUR CODE STARTS HERE
-    
-    
-    
-    ;; YOUR CODE ENDS HERE
 
+
+
+    ;; YOUR CODE ENDS HERE
     ;; DO NOT MODIFY
     pop     r15
     pop     r14
