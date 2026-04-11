@@ -295,7 +295,11 @@ int main(int argc, char **argv) {
 	free(ref_tickets);
 	free(tickets);
 
-	if (task_result > 0.0)
+	if (task_result > 0.0) {
+		printf("Test %d.................PASSED: %.2fp\n", test_no, task_result);
 		return 0;
+	}
+	
+	printf("Test %d.................FAILED: %.2fp\n", test_no, 0.0);
 	return 1;
 }

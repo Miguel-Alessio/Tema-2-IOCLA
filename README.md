@@ -564,8 +564,6 @@ If you wish to verify a certain test from a task, run the checker executable fro
 For example, for verifying test 2 from task 3:
 ./src/task3/checker 2
 
-This command only write your code's output to ./output, it doesn't actually compare it to the ./ref files
-
 ---
 
 **Eli and Edi thanks you for your help and looks forward to seeing you for Assignment 3 from PCLP2 as well!!**
