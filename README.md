@@ -196,7 +196,7 @@ Inside the labyrinth were numerous fountains decorated with sculptures inspired 
 Although extremely popular, the labyrinth was demolished in 1778, as it was considered expensive to maintain. In its place, a simpler English-style garden was created. Today, the labyrinth no longer exists, but it remains an important part of the history and charm of the gardens of Versailles, symbolizing the elegance, complexity and refinement of the French Baroque era.
 
 <div align="center">
-    <img title="IDS" alt="IDS" src="./src/images/versailles.png" width="700" height="1000">
+    <img title="IDS" alt="IDS" src="./src/images/versailles.PNG" width="700" height="1000">
 </div>
 
 ---
