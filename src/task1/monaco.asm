@@ -2,15 +2,6 @@ section .text
 
 global fix_lap_times
 
-; void fix_lap_times(unsigned int *in_times, char *errors, 
-;                    int num_drivers, unsigned int *out_times, 
-;                    int *error_count)
-; Input:  
-;   RDI = in_times array
-;   RSI = errors array
-;   RDX = num_drivers
-;   RCX = out_times array
-;   R8  = error_count pointer
 
 fix_lap_times:
     ;; DO NOT MODIFY
@@ -22,9 +13,13 @@ fix_lap_times:
     push r14
     push r15
     ;; DO NOT MODIFY
-    ;; Your code starts here
+   
+    ;; YOUR CODE STARTS HERE
+    
+    
+    
+    ;; YOUR CODE ENDS HERE
 
-    ;; Your code ends here
     ;; DO NOT MODIFY
     pop r15
     pop r14

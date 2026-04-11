@@ -6,7 +6,6 @@ global solve_labyrinth
 
 section .text
 
-; void solve_labyrinth(unsigned int *out_line, unsigned int *out_col, unsigned int m, unsigned int n, char **maze);
 
 solve_labyrinth:
     ;; DO NOT MODIFY
@@ -18,11 +17,11 @@ solve_labyrinth:
     push    r14
     push    r15
 
-    mov     r12, rdi    ; unsigned int *out_line
-    mov     r13, rsi    ; unsigned int *out_col
-    mov     r14, rdx    ; unsigned int m
-    mov     r15, rcx    ; unsigned int n
-    mov     rbx, r8     ; char **maze
+    mov     r12, rdi
+    mov     r13, rsi
+    mov     r14, rdx
+    mov     r15, rcx
+    mov     rbx, r8
     ;; DO NOT MODIFY
    
     ;; YOUR CODE STARTS HERE

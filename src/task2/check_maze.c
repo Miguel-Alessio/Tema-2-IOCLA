@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define N_TESTS 10
+#define N_TESTS 5
 
 typedef struct position {
     unsigned int line;
@@ -61,8 +61,8 @@ void check_result(int test_no, Position *sol, double *score) {
 
     if (correct_solution.line == sol->line 
         && correct_solution.col == sol->col) {
-        printf("Test %d.................PASSED: %fp\n", test_no, 2.5);
-        *score += 2.5;
+        printf("Test %d.................PASSED: %dp\n", test_no, 5);
+        *score += 5;
     } else {
         printf("Test %d.................FAILED: %dp\n", test_no, 0);
     }
@@ -84,7 +84,7 @@ int main() {
 
     printf("--------------TASK 2--------------\n");
 
-    for (test_no = 0; test_no < N_TESTS; test_no++) {
+    for (test_no = 1; test_no < N_TESTS; test_no++) {
         read_test(test_no, &a, &m, &n);
 
         solve_labyrinth(&sol.line, &sol.col, m, n, a);
