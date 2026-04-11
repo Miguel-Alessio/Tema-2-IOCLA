@@ -57,7 +57,7 @@ from its traditional late May or early June slot. The event remains a highlight 
 motorsport calendar event.
 
 <div align="center">
-    <img title="IDS" alt="IDS" src="./src/images/circuit.png" width="1000" height="1900">
+    <img title="IDS" alt="IDS" src="./src/images/circuit.PNG" width="1000" height="1900">
 </div>
 
 Eli and Edi have just arrived in Monte Carlo, the heart of luxury and speed. It's Formula 1 Grand Prix weekend, and the atmosphere is electrifying. While taking Instagram-worthy photos of each other along the famous harbor, they notice a distressed Ferrari engineer staring at a dead screen.
