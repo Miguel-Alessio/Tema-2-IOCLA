@@ -1,5 +1,6 @@
 section .text
 
+;; DO NOT MODIFY
 global check_column
 global check_row
 global check_box
@@ -9,7 +10,6 @@ global check_box
 ; rsi = int size
 ; rdx = int rowNr
 check_row:
-	;; DO NOT MODIFY
 	push rbp
 	mov rbp, rsp
 	push rbx
@@ -29,14 +29,14 @@ check_row:
 	pop rbx
 	pop rbp
 	ret
+	;; DO NOT MODIFY
 
-
+;; DO NOT MODIFY
 ; int check_column(int **array, int size, int columnNr)
 ; rdi = int **array
 ; rsi = int size
 ; rdx = int columnNr
 check_column:
-	;; DO NOT MODIFY
 	push rbp
 	mov rbp, rsp
 	push rbx
@@ -56,13 +56,14 @@ check_column:
 	pop rbx
 	pop rbp
 	ret
+	;; DO NOT MODIFY
 
+;; DO NOT MODIFY
 ; int check_box(int **array, int size, int boxNr)
 ; rdi = int **array
 ; rsi = int size
 ; rdx = int boxNr
 check_box:
-	;; DO NOT MODIFY
 	push rbp
 	mov rbp, rsp
 	push rbx
