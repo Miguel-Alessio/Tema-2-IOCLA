@@ -351,9 +351,9 @@ You will have to implement the delay algorithm, the function you have to impleme
 ```
 <br>
 
--> RDI = address of the tickets array (struct ticket* tickets)
+- `RDI` = address of the tickets array (struct ticket* tickets)
 
--> RSI = number of tickets (int nrTickets)
+- `RSI` = number of tickets (int nrTickets)
 <br>
 
 The function must be completed in the `subtask1.asm` file.
@@ -387,16 +387,16 @@ The function you have to implement has the following header:
 
 <br>
 
--> RDI = address of the original tickets array (struct ticket* origTickets)
+- `RDI` = address of the original tickets array (struct ticket* origTickets)
 <br>
 
--> RSI = address of the destination array (struct ticket* destTickets)
+- `RSI` = address of the destination array (struct ticket* destTickets)
 <br>
 
--> RDX = address of the integer containing the number of tickets (int* nrTickets)
+- `RDX` = address of the integer containing the number of tickets (int* nrTickets)
 <br>
 
--> RCX = minimum luggage weight (int min_bag_weight)
+- `RCX` = minimum luggage weight (int min_bag_weight)
 
 
 The function must be completed in the `subtask2.asm` file.
@@ -421,15 +421,15 @@ The function you have to implement has the following header:
 ```
 <br>
 
--> RDI = address of the tickets array (struct ticket* tickets)
+- `RDI` = address of the tickets array (struct ticket* tickets)
 
--> RSI = number of tickets (int nrTickets)
+- `RSI` = number of tickets (int nrTickets)
 <br>
 
--> RDX = address of the structure where the found ticket will be copied (struct ticket* bestTicket)
+- `RDX` = address of the structure where the found ticket will be copied (struct ticket* bestTicket)
 <br>
 
--> RCX =  address of the string representing the searched destination (char* destination)
+- `RCX` =  address of the string representing the searched destination (char* destination)
 
 The function must be completed in the `subtask3.asm` file.
 
@@ -444,11 +444,11 @@ The function must be completed in the `subtask3.asm` file.
 
 > Return values:
 
-- RAX = 1 if a ticket with the requested destination was found
+- `RAX` = 1 if a ticket with the requested destination was found
 
-- RAX = 0 if no ticket with the requested destination exists
+- `RAX` = 0 if no ticket with the requested destination exists
 
-- RDX = address of the structure that will hold the found ticket
+- `RDX` = address of the structure that will hold the found ticket
 
 > Notes: 
 
