@@ -1,25 +1,21 @@
 ; write the structures
-; struc date
-; 		???
-; endstruct
-
-; struct ticket
-; 		???
+; struct flight
+; 		TODO
 ; endstruct
 
 
 section .text
 
-global filter_tickets
+;; DO NOT MODIFY
+global filter_flights
 
-; void filter_tickets(struct ticket* origTickets, struct ticket* destTickets
-;						 int* nrTickets, int min_bag_weight)
-; rdi = struct ticket *origTickets
-; rsi = struct ticket *destTickets
-; rdx = int *nrTickets
+; void filter_flights(struct flight* origFlights, struct flight* finalFlights
+;						 int* nrFlights, int min_bag_weight)
+; rdi = struct flight *origFlights
+; rsi = struct flight *finalFlights
+; rdx = int *nrFlights
 ; rcx = int min_bag_weight
-filter_tickets:
-	;; DO NOT MODIFY
+filter_flights:
 	push rbp
 	mov rbp, rsp
 	push rbx
