@@ -25,7 +25,7 @@ struct ticket{
 }; // 42 bytes size, no padding
 
 extern void apply_delay(struct ticket* tickets, int nr_tickets);
-extern void filter_tickets(struct ticket* origTickets, struct ticket* destTickets,
+extern void filter_flights(struct ticket* origTickets, struct ticket* destTickets,
 							int* nr_tickets, int min_bag_weight);
 extern int sort_and_return(struct ticket* tickets, int nr_tickets, 
 							struct ticket* bestTicket, char* destination);
@@ -129,7 +129,7 @@ double handle_task1(unsigned int test_no, int nr_tickets,  struct ticket *ticket
 double handle_task2(unsigned int test_no, int nr_tickets,  struct ticket *tickets, struct ticket *ref_tickets, int min_bag_weight) {
 	struct ticket* tickets_redone = malloc(nr_tickets * sizeof(struct ticket));
 	
-	filter_tickets(tickets, tickets_redone, &nr_tickets, min_bag_weight);
+	filter_flights(tickets, tickets_redone, &nr_tickets, min_bag_weight);
 
 	memcpy((void*)tickets, (void*)tickets_redone, nr_tickets * sizeof(struct ticket));
 	free(tickets_redone);
@@ -204,7 +204,7 @@ double handle_all_tasks(unsigned int test_no, int nr_tickets, struct ticket *tic
 
 	struct ticket* tickets_redone = malloc(nr_tickets * sizeof(struct ticket));
 	
-	filter_tickets(tickets, tickets_redone, &nr_tickets, min_bag_weight);
+	filter_flights(tickets, tickets_redone, &nr_tickets, min_bag_weight);
 
 	memcpy((void*)tickets, (void*)tickets_redone, nr_tickets * sizeof(struct ticket));
 	free(tickets_redone);
