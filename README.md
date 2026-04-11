@@ -311,8 +311,6 @@ Due to the storm in Northern Europe, all flights have experienced delays. Each f
 
 **Requirement:** Implement the apply_delay function that receives an array of flights and their count, and adds the delay to each flight.
 
-
-You will have to implement the delay algorithm, the function you have to implement has the following header:
 <br>
 ```c
         void apply_delay(struct flight* flights, int nrFlights);
@@ -324,7 +322,7 @@ You will have to implement the delay algorithm, the function you have to impleme
 - `RSI` = number of flights (int nrFlights)
 <br>
 
-The function must be completed in the `subtask1.asm` file.
+The function must be written in the `subtask1.asm` file.
 
 > **Other details** <br>
 > You must write your own structures defined in the README (struc flight and any other helpful structs).
@@ -371,7 +369,7 @@ The function you have to implement has the following header:
 - `RCX` = minimum luggage weight (int min_bag_weight)
 
 
-The function must be completed in the `subtask2.asm` file.
+The function must be written in the `subtask2.asm` file.
 
 > **Rules** <br>
 > Update the value at address nrFlights with the new count of filtered flights.
@@ -408,15 +406,15 @@ The function you have to implement has the following header:
 
 - `RCX` =  address of the string representing the searched destination (char* destination)
 
-The function must be completed in the `subtask3.asm` file.
+The function must be written in the `subtask3.asm` file.
 
 > **Rules** <br>
 > Sorting rules:
 
-- Compare days (smaller day = earlier = better)
-- If days are equal, compare arrivingTime.hour (smaller hour = earlier = better)
-- If hours are equal, compare arrivingTime.minute (smaller minute = earlier = better)
-- If minutes are also equal, compare bag_weight (larger = better)
+- Compare days (smaller day => earlier => better)
+- If days are equal, compare arrivingTime.hour (smaller hour => earlier => better)
+- If hours are equal, compare arrivingTime.minute (smaller minute => earlier => better)
+- If minutes are also equal, compare bag_weight (larger => better)
 - Only compare the arriving values, Eli & Edi don't care about the departing times
 
 > Return values:
