@@ -72,7 +72,7 @@ Your task is to repair the corrupted data, generate the fixed lap times in an ou
 
 ---
 
-## Subtask 1 – Counting Errors
+## Counting Errors
 
 Traverse the entire array and count how many cars have the error flag set to 1.
 
@@ -84,7 +84,7 @@ Traverse the entire array and count how many cars have the error flag set to 1.
 - `RAX` = total number of drivers with error flag = 1
 ---
 
-## Subtask 2 – Modify the Array – Fix Corrupted Lap
+## Modify the Array – Fix Corrupted Lap
 
 After counting the errors, generate the corrected lap times in the output array according to these rules:
 
