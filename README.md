@@ -1,9 +1,11 @@
 # Homework 2 - Coding Across Europe: Eli and Edi’s Adventure
 
 **Authors**
-- Kaan Nasurla
-- Victor Davidescu
+- Kaan NASURLA
+- Victor DAVIDESCU
 
+**Team leader**
+- Ilinca-Ioana STRUŢU
 ---
 
 ### DEADLINE SOFT: 30.04.2026 23:59
