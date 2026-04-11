@@ -1,7 +1,3 @@
-extern printf
-extern position
-
-
 ; you can declare any helper variables in .data or .bss
 
 section .text
