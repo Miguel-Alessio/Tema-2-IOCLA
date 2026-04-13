@@ -176,6 +176,10 @@ road) and a single future position, the rest of the neighboring boxes being occu
 
 To solve the maze, the famous landscape architect André Le Nôtre will ensure that there is only one correct solution.
 
+<div align="center">
+    <img title="IDS" alt="IDS" src="./src/images/versailles.PNG" width="1000" height="1700">
+</div>
+
 The function definition is:
 
 ```c
