@@ -60,14 +60,14 @@ void solve_labyrinth(unsigned int *out_line, unsigned int *out_col, unsigned int
 ### Extra information
 Your code must solve the maze and save the exit line index at the out_line address, and the exit column index at the out_col address.
 
-<img title="Dynamic Array" alt="Dynamic Array" src="./images/maze1.jpg">
+<img title="Dynamic Array" alt="Dynamic Array" src="../images/maze1.jpg">
 
 
 A dynamically allocated 2D array has the form shown in the figure below.
 Unlike a statically allocated two-dimensional array, in this case we cannot guarantee that successive rows in the array will be placed one after the other in memory, but only that each row is contiguous in memory.
 For more details, you can also consult [this section](https://cs-pub-ro.github.io/hardware-software-interface/labs/lab-02/reading/memory-operations.html#reading-pointers) in the lab.
 
-<img title="Dynamic Array" alt="Dynamic Array" src="./images/OiDNd.jpg">
+<img title="Dynamic Array" alt="Dynamic Array" src="../images/OiDNd.jpg">
 
 ---
 
