@@ -148,7 +148,7 @@ allocated. The two adventurers, Eli and Edi, buy entrance tickets, Eli takes a t
 that includes entry to the palace gardens. In this sense, upon completing the guided tour of the palace, Eli goes to the exit of the gardens to wait for her boyfriend, while Edi must find the exit and meet his girlfriend, Eli. Since the duo studies computer science, they realized that it is much easier to find the solution by coding the following:
 
 - Each element in the matrix is ​​associated with a cell of the maze.
-- When the value of an element in the matrix is ​​1 (ASCII code 0x39), that cell is represented by a plant wall, and Edi cannot move through it.
+- When the value of an element in the matrix is ​​1 (ASCII code 0x31), that cell is represented by a plant wall, and Edi cannot move through it.
 - When the value of an element in the matrix is ​​0 (ASCII code 0x30), that cell is free, and Edi can move into it.
 
 Edi's position in the maze is represented by cartesian coordinates, a pair (line, column).
