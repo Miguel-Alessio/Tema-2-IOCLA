@@ -40,7 +40,7 @@ The function must be written in the `subtask1.asm` file.
 > **Other details** <br>
 > You must write your own structures defined in the README (struc flight and any other helpful structs).
 
-> The size of a flight is flught_size (42 bytes).
+> The size of a flight is flight_size (42 bytes).
 
 > The checker will not check the delay fields from the resulting array for any of the subtasks. Up to you if you set those fields to 0, ignore them, etc.
 
@@ -49,6 +49,8 @@ The function must be written in the `subtask1.asm` file.
 ## Constraints
 
 - 1 ≤ `nrFlights` ≤ 100
+- 0 < `delayHours` < 24
+- 0 < `delayMinutes` < 60
 
 ---
 
