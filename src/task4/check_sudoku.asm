@@ -20,6 +20,80 @@ check_row:
 	;; DO NOT MODIFY
 	;; Your code starts here
 
+;n*(n+1)/2
+calcul_sum:
+	;we use r15 to copy the size of the array
+	mov r15, rsi
+	;increase by one (n+1)
+	inc r15
+	;needed for multiplication
+	mov rax, rsi
+	;(n+1)*n
+	mul r15
+	;shift one bit to the right so we divide by 2, (n+1)*n/2
+	shr rax, 1
+	;we save the sum in r15
+	mov r15, rax
+
+	mov rbx, 1;contor
+	mov r14, 1
+calculation_factorial:
+	cmp rbx, rsi
+	je finish_factorial
+	inc rbx
+	mov rax, r14
+	mul rbx
+	mov r14, rax
+	jmp calculation_factorial
+
+finish_factorial:
+	;we initialize the current sum with 0
+	mov r12, 0
+	;we initialize the current product with 1
+	mov r13, 1
+	;we initialize the contor to 0
+	mov rcx, 0
+	;we get the address of the row
+	mov r10, [rdi + rdx * 8]
+
+check_loop:
+	cmp rcx, rsi
+	je finish_sum_factorial
+	;we get the element from the row
+	mov eax, dword [r10 + rcx * 4]
+	;we add to the current sum
+	add r12, rax
+	;we multiply to the current product
+	imul r13, rax
+	inc rcx
+	jmp check_loop
+
+finish_sum_factorial:
+	;we check if sum and product are correct
+	cmp r12, r15
+	jne not_valid
+	cmp r13, r14
+	jne not_valid
+	mov rax, 1
+	jmp end_check_col
+
+not_valid:
+	mov rax, 0
+
+end_check_col:
+	;; Your code ends here
+	;; DO NOT MODIFY
+	pop r15
+	pop r14
+	pop r13
+	pop r12
+	pop rbx
+	pop rbp
+	ret
+	;; DO NOT MODIFY
+
+
+
 	;; Your code ends here
 	;; DO NOT MODIFY
 	pop r15
@@ -47,6 +121,68 @@ check_column:
 	;; DO NOT MODIFY
 	;; Your code starts here
 
+	;n*(n+1)/2
+calcul_sum_col:
+	;we use r15 to copy the size of the array
+	mov r15, rsi
+	;increase by one (n+1)
+	inc r15
+	;needed for multiplication
+	mov rax, rsi
+	;(n+1)*n
+	mul r15
+	;shift one bit to the right so we divide by 2, (n+1)*n/2
+	shr rax, 1
+	;we save the sum in r15
+	mov r15, rax
+
+	mov rbx, 1;contor
+	mov r14, 1
+calculation_factorial_col:
+	cmp rbx, rsi
+	je finish_factorial_col
+	inc rbx
+	mov rax, r14
+	mul rbx
+	mov r14, rax
+	jmp calculation_factorial_col
+
+finish_factorial_col:
+	;we initialize the current sum with 0
+	mov r12, 0
+	;we initialize the current product with 1
+	mov r13, 1
+	;we initialize the contor to 0
+	mov rcx, 0
+	;we get the address of the row
+	mov r10, [rdi + rdx * 8]
+
+check_loop_col:
+	cmp rcx, rsi
+	je finish_sum_factorial_col
+	;we get the address of the current row
+	mov r10,[rdi+rcx*8]
+	;we get the element from the fixed column
+	mov eax,dword[r10+rdx*4]
+	;we add to the current sum
+	add r12,rax
+	;we multiply to the current product
+	imul r13,rax
+	inc rcx
+	jmp check_loop_col
+
+finish_sum_factorial_col:
+	;we check if sum and product are correct
+	cmp r12, r15
+	jne not_valid
+	cmp r13, r14
+	jne not_valid_col
+	mov rax, 1
+	jmp end_check
+
+not_valid_col:
+	mov rax, 0
+end_check:
 	;; Your code ends here
 	;; DO NOT MODIFY
 	pop r15
