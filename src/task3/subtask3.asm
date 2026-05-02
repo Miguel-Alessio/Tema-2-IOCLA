@@ -43,7 +43,7 @@ sort_and_return:
 	mov r8d,esi;exterior limit
 ext_loop:
 	mov r12d,0;swaps_made=false
-	mov rcx,r15;start address of the array
+	mov rbx,r15;start address of the array
 	mov r9d,esi;contor
 	dec r9d
 inner_loop:
@@ -54,7 +54,7 @@ inner_loop:
 	jl no_swap
 	movzx eax,byte[rbx+36];A flight hour
 	movzx edx,byte[rbx+36+42];B flight hour
-	cmp rax,edx
+	cmp eax,edx
 	jg swap_flights
 	jl no_swap
 	movzx eax,byte[rbx+37];A flight minute
@@ -98,7 +98,51 @@ swap_flights:
     mov ax, [rbx + 42 + 40]
     mov [rbx + 40], ax
     pop word [rbx + 42 + 40]
-	
+
+no_swap:
+	add rbx,42
+	dec r9d
+	jnz inner_loop
+
+	test r12d,r12d
+	jz search_destination
+	dec r8d
+	jnz ext_loop
+search_destination:
+	mov r8d,esi
+	mov rdi,r15
+find_loop:
+	test r8d,r8d
+	jz not_found
+	mov rcx,0
+check_string:
+	mov al,[rdi+rcx]
+	cmp al,[r14+rcx]
+	jne next_flight
+	inc rcx
+	cmp rcx,32
+	jl check_string
+	mov rax, [rdi]
+    mov [r13], rax
+    mov rax, [rdi + 8]
+    mov [r13 + 8], rax
+    mov rax, [rdi + 16]
+    mov [r13 + 16], rax
+    mov rax, [rdi + 24]
+    mov [r13 + 24], rax
+    mov rax, [rdi + 32]
+    mov [r13 + 32], rax
+    mov ax, [rdi + 40]
+    mov [r13 + 40], ax
+	mov rax,1
+	jmp finish
+next_flight:
+	add rdi,42
+	dec r8d
+	jnz find_loop
+not_found:
+	mov rax,0
+finish:	
 	;; Your code ends here
 	;; DO NOT MODIFY
 	pop r15
