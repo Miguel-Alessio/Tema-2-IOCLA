@@ -1,7 +1,16 @@
 ; write the structures. make sure it fits the layour in the README
-; struct flight
-; 		TODO
-; endstruct
+struct flight
+	.destination: resw 32
+	.depart_day: resb 1
+	.depart_hour: resb 1
+	.depart_minutes: resb 1
+	.arrival_day: resb 1
+	.arrival_hour: resb 1
+	.arrival_minute: resb 1
+	.bag_weight: resw 2
+	.delay_minutes: resb 1
+	.delay_hours: resb 1
+enstruct
 
 section .text
 ;; DO NOT MODIFY
