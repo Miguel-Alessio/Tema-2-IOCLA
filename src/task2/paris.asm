@@ -47,71 +47,103 @@ start_maze:
 	cmp r11, r15
 	je win
 
-check_right:
-	mov r8, r10
-	mov r9, r11
-	inc r9
-	lea rcx, [rel check_down]
-	jmp validate_move
-
-check_down:
-	mov r8, r10
-	mov r9, r11
-	inc r8
-	lea rcx, [rel check_left]
-	jmp validate_move
-
-check_left:
-	;
-	mov r8, r10
-	mov r9, r11
-	dec r9
-	lea rcx, [rel check_up]
-	jmp validate_move
-
 check_up:
-	;
+	; we check if the row is 0
+	cmp r10, 0
+	je check_left
 	mov r8, r10
-	mov r9, r11
 	dec r8
-	lea rcx, [rel stuck]
-	jmp validate_move
-validate_move:
-	; we check the upper bounds of the matrix
-	cmp r8, r14
-	jg fail_move
-	cmp r9, r15
-	jg fail_move
-
-	; we check the lower bounds of the matrix (below 0)
-	test r8, r8
-	js fail_move
-	test r9, r9
-	js fail_move
-
 	; we check if it is the cell we just came from
 	cmp r8, rdi
-	jne do_check_char
-	cmp r9, rsi
-	je fail_move
+	jne do_check_u
+	cmp r11, rsi
+	je check_left
 
-do_check_char:
-	;
-	mov rdx, qword [rbx+r8*8]
-	mov al, byte [rdx+r9]
+do_check_u:
+	; 8 is the size in bytes of a pointer
+	mov r9, qword [rbx+r8*8]
+	mov al, byte [r9+r11]
 	; we check if the char is '0'
 	cmp al, '0'
-	jne fail_move
-
+	jne check_left
 	; we save the current position to history and make the step
 	mov rdi, r10
 	mov rsi, r11
 	mov r10, r8
-	mov r11, r9
 	jmp start_maze
 
-fail_move:
-	jmp rcx
+check_left:
+	; we check if the column is 0
+	cmp r11, 0
+	je check_down
+	mov r8, r11
+	dec r8
+	; we check if it is the cell we just came from
+	cmp r10, rdi
+	jne do_check_l
+	cmp r8, rsi
+	je check_down
+
+do_check_l:
+	; 8 is the size in bytes of a pointer
+	mov r9, qword [rbx+r10*8]
+	mov al, byte [r9+r8]
+	; we check if the char is '0'
+	cmp al, '0'
+	jne check_down
+	; we save the current position to history and make the step
+	mov rdi, r10
+	mov rsi, r11
+	mov r11, r8
+	jmp start_maze
+
+check_down:
+	cmp r10, r14
+	je check_right
+	mov r8, r10
+	inc r8
+	; we check if it is the cell we just came from
+	cmp r8, rdi
+	jne do_check_d
+	cmp r11, rsi
+	je check_right
+
+do_check_d:
+	; 8 is the size in bytes of a pointer
+	mov r9, qword [rbx+r8*8]
+	mov al, byte [r9+r11]
+	; we check if the char is '0'
+	cmp al, '0'
+	jne check_right
+	; we save the current position to history and make the step
+	mov rdi, r10
+	mov rsi, r11
+	mov r10, r8
+	jmp start_maze
+
+check_right:
+	cmp r11, r15
+	je stuck
+	mov r8, r11
+	inc r8
+	; we check if it is the cell we just came from
+	cmp r10, rdi
+	jne do_check_r
+	cmp r8, rsi
+	je stuck
+
+do_check_r:
+	; 8 is the size in bytes of a pointer
+	mov r9, qword [rbx+r10*8]
+	mov al, byte [r9+r8]
+	; we check if the char is '0'
+	cmp al, '0'
+	jne stuck
+	; we save the current position to history and make the step
+	mov rdi, r10
+	mov rsi, r11
+	mov r11, r8
+	jmp start_maze
 
 stuck:
 	jmp win
@@ -130,4 +162,4 @@ win:
 	pop	rbx
 	pop	rbp
 	ret
-	;; DO NOT MODIFY
+	;; DO NOT MODIFYs

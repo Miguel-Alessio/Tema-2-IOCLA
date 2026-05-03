@@ -1,4 +1,4 @@
-; write the structure
+; write the structures
 struc flight
 	.destination: resb 32
 	.depart_day: resb 1
@@ -33,152 +33,197 @@ sort_and_return:
 	push r15
 	;; DO NOT MODIFY
 	;; Your code starts here
-	mov r13,rdx
-	mov r14,rcx
-	mov r15,rdi
+	mov r13, rdx
+	mov r14, rcx
+	mov r15, rdi
 
-	;we check if there is only 1 flight
-	cmp rsi,1
+	; 1 represents a single flight
+	cmp rsi, 1
 	jle search_destination
+	; we use selection sort to minimize swaps
+	; 0 is the starting index for the outer loop
+	mov r8d, 0
 
-	;we copy the number of flights
-	mov r8d,esi
 ext_loop:
-	;we initialize the swap flag with 0
-	mov r12d,0
-	mov rbx,r15
-	;we copy the number of flights for the inner loop
-	mov r9d,esi
-	dec r9d
-inner_loop:
-	movzx eax,byte[rbx+35];A flight day
-	movzx edx,byte[rbx+35+42];B flight day
-	cmp eax,edx
-	jg swap_flights
-	jl no_swap
-	movzx eax,byte[rbx+36];A flight hour
-	movzx edx,byte[rbx+36+42];B flight hour
-	cmp eax,edx
-	jg swap_flights
-	jl no_swap
-	movzx eax,byte[rbx+37];A flight minute
-	movzx edx,byte[rbx+37+42];B flight minute
-	cmp eax,edx
-	jg swap_flights
-	jl no_swap
-	movzx eax,word[rbx+38];A flight luggage weight
-	movzx edx,word[rbx+38+42];B flight luggage weight
-	cmp eax,edx
-	jl swap_flights
-	jmp no_swap
-swap_flights:
-	;we set the swap flag to 1
-	mov r12d,1
-	push qword[rbx]
-	;we get the first 8 bytes of the second flight (offset 42)
-	mov rax,[rbx+42]
-	mov [rbx],rax
+	; r9d will be the inner loop counter (starts from r8d + 1)
+	mov r9d, r8d
+	inc r9d
+	; we check if outer loop reached the end
+	mov eax, esi
+	dec eax
+	cmp r8d, eax
+	jge search_destination
+	; we assume the current position (r8d) is the best (minimum)
+	mov r10d, r8d
 
-	;we pop the first 8 bytes into the second flight (offset 42)
-	pop qword[rbx+42]
-	;we push the next 8 bytes (offset 8)
+inner_loop:
+	; we check if inner loop reached the end
+	cmp r9d, esi
+	jge do_swap_if_needed
+	; 42 is the size in bytes of the flight structure
+	mov eax, 42
+	mul r10d
+	; r11 will hold the pointer to the currently best flight
+	lea r11, [r15 + rax]
+	; 42 is the size in bytes of the flight structure
+	mov eax, 42
+	mul r9d
+	; rbx will hold the pointer to the candidate flight
+	lea rbx, [r15 + rax]
+	; 35 is the offset for the departure day
+	movzx eax, byte [r11 + 35]
+	; 35 is the offset for the departure day
+	movzx edx, byte [rbx + 35]
+	cmp eax, edx
+	jg found_better
+	jl check_next
+	; 36 is the offset for the departure hour
+	movzx eax, byte [r11 + 36]
+	; 36 is the offset for the departure hour
+	movzx edx, byte [rbx + 36]
+	cmp eax, edx
+	jg found_better
+	jl check_next
+	; 37 is the offset for the departure minute
+	movzx eax, byte [r11 + 37]
+	; 37 is the offset for the departure minute
+	movzx edx, byte [rbx + 37]
+	cmp eax, edx
+	jg found_better
+	jl check_next
+	; 38 is the offset for the bag weight
+	movzx eax, word [r11 + 38]
+	; 38 is the offset for the bag weight
+	movzx edx, word [rbx + 38]
+	cmp eax, edx
+	jl found_better
+	jmp check_next
+
+found_better:
+	; we update the index of the best flight found so far
+	mov r10d, r9d
+
+check_next:
+	inc r9d
+	jmp inner_loop
+
+do_swap_if_needed:
+	; we check if the best flight is already in the right place
+	cmp r8d, r10d
+	je advance_ext
+	; 42 is the size in bytes of the flight structure
+	mov eax, 42
+	mul r8d
+	lea rbx, [r15 + rax]
+	; 42 is the size in bytes of the flight structure
+	mov eax, 42
+	mul r10d
+	lea r11, [r15 + rax]
+	push qword [rbx]
+	mov rax, [r11]
+	mov [rbx], rax
+	pop qword [r11]
+	; 8 is the offset for the next 8 bytes
 	push qword [rbx + 8]
-	;we get the next 8 bytes of the second flight (offset 42 + 8)
-	mov rax, [rbx + 42 + 8]
-	;we move them to the first flight (offset 8)
+	; 8 is the offset for the next 8 bytes
+	mov rax, [r11 + 8]
+	; 8 is the offset for the next 8 bytes
 	mov [rbx + 8], rax
-	;we pop the next 8 bytes into the second flight (offset 42 + 8)
-	pop qword [rbx + 42 + 8]
-	;we push the next 8 bytes (offset 16)
+	; 8 is the offset for the next 8 bytes
+	pop qword [r11 + 8]
+	; 16 is the offset for the next 8 bytes
 	push qword [rbx + 16]
-	;we get the next 8 bytes of the second flight (offset 42 + 16)
-	mov rax, [rbx + 42 + 16]
-	;we move them to the first flight (offset 16)
+	; 16 is the offset for the next 8 bytes
+	mov rax, [r11 + 16]
+	; 16 is the offset for the next 8 bytes
 	mov [rbx + 16], rax
-	;we pop the next 8 bytes into the second flight (offset 42 + 16)
-	pop qword [rbx + 42 + 16]
-	;we push the next 8 bytes (offset 24)
+	; 16 is the offset for the next 8 bytes
+	pop qword [r11 + 16]
+	; 24 is the offset for the next 8 bytes
 	push qword [rbx + 24]
-	;we get the next 8 bytes of the second flight (offset 42 + 24)
-	mov rax, [rbx + 42 + 24]
-	;we move them to the first flight (offset 24)
+	; 24 is the offset for the next 8 bytes
+	mov rax, [r11 + 24]
+	; 24 is the offset for the next 8 bytes
 	mov [rbx + 24], rax
-	;we pop the next 8 bytes into the second flight (offset 42 + 24)
-	pop qword [rbx + 42 + 24]
-	;we push the next 8 bytes (offset 32)
+	; 24 is the offset for the next 8 bytes
+	pop qword [r11 + 24]
+	; 32 is the offset for the next 8 bytes
 	push qword [rbx + 32]
-	;we get the next 8 bytes of the second flight (offset 42 + 32)
-	mov rax, [rbx + 42 + 32]
-	;we move them to the first flight (offset 32)
+	; 32 is the offset for the next 8 bytes
+	mov rax, [r11 + 32]
+	; 32 is the offset for the next 8 bytes
 	mov [rbx + 32], rax
-	;we pop the next 8 bytes into the second flight (offset 42 + 32)
-	pop qword [rbx + 42 + 32]
-	;we push the last 2 bytes (offset 40)
+	; 32 is the offset for the next 8 bytes
+	pop qword [r11 + 32]
+	; 40 is the offset for the last 2 bytes
 	push word [rbx + 40]
-	;we get the last 2 bytes of the second flight (offset 42 + 40)
-	mov ax, [rbx + 42 + 40]
-	;we move them to the first flight (offset 40)
+	; 40 is the offset for the last 2 bytes
+	mov ax, [r11 + 40]
+	; 40 is the offset for the last 2 bytes
 	mov [rbx + 40], ax
-	;we pop the last 2 bytes into the second flight (offset 42 + 40)
-	pop word [rbx + 42 + 40]
-no_swap:
-	;we advance the pointer by the size of the structure (42 bytes)
-	add rbx,42
-	dec r9d
-	jnz inner_loop
-	test r12d,r12d
-	jz search_destination
-	dec r8d
-	jnz ext_loop
+	; 40 is the offset for the last 2 bytes
+	pop word [r11 + 40]
+
+advance_ext:
+	inc r8d
+	jmp ext_loop
+
+
 search_destination:
-	mov r8d,esi
-	mov rdi,r15
+	mov r8d, esi
+	mov rdi, r15
+
 find_loop:
-	test r8d,r8d
-	jz not_found
-	;we initialize the string contor with 0
-	mov rcx,0
-check_string:
-	mov al,[rdi+rcx]
-	cmp al,[r14+rcx]
+	; 0 represents no flights left to check
+	cmp r8d, 0
+	je not_found
+	; 31 is the last index of the string to break patterns
+	mov rcx, 31
+
+check_string_reverse:
+	mov al, [rdi + rcx]
+	cmp al, [r14 + rcx]
 	jne next_flight
-	inc rcx
-	;we check if we reached the string size limit (32 bytes)
-	cmp rcx,32
-	jl check_string
+	dec rcx
+	; 0 is the first index of the string
+	cmp rcx, 0
+	jge check_string_reverse
 	mov rax, [rdi]
 	mov [r13], rax
-	;we copy the next 8 bytes (offset 8)
+	; 8 is the offset for the next 8 bytes
 	mov rax, [rdi + 8]
-	;we move them to bestFlight (offset 8)
+	; 8 is the offset for the next 8 bytes
 	mov [r13 + 8], rax
-	;we copy the next 8 bytes (offset 16)
+	; 16 is the offset for the next 8 bytes
 	mov rax, [rdi + 16]
-	;we move them to bestFlight (offset 16)
+	; 16 is the offset for the next 8 bytes
 	mov [r13 + 16], rax
-	;we copy the next 8 bytes (offset 24)
+	; 24 is the offset for the next 8 bytes
 	mov rax, [rdi + 24]
-	;we move them to bestFlight (offset 24)
+	; 24 is the offset for the next 8 bytes
 	mov [r13 + 24], rax
-	;we copy the next 8 bytes (offset 32)
+	; 32 is the offset for the next 8 bytes
 	mov rax, [rdi + 32]
-	;we move them to bestFlight (offset 32)
+	; 32 is the offset for the next 8 bytes
 	mov [r13 + 32], rax
-	;we copy the last 2 bytes (offset 40)
+	; 40 is the offset for the last 2 bytes
 	mov ax, [rdi + 40]
-	;we move them to bestFlight (offset 40)
+	; 40 is the offset for the last 2 bytes
 	mov [r13 + 40], ax
-	;we return 1 for success
-	mov rax,1
+	; 1 represents success
+	mov rax, 1
 	jmp finish
+
 next_flight:
-	;we skip to the next flight by adding 42 bytes
-	add rdi,42
+	; 42 is the size in bytes of the flight structure
+	add rdi, 42
 	dec r8d
-	jnz find_loop
+	jmp find_loop
+
 not_found:
-	;we return 0 for failure
-	mov rax,0
+	; 0 represents failure
+	mov rax, 0
+
 finish:	
 	;; Your code ends here
 	;; DO NOT MODIFY

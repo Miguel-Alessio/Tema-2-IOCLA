@@ -33,51 +33,58 @@ filter_flights:
 	push r15
 	;; DO NOT MODIFY
 	;; Your code starts here
-	;we copy the number of flights from the pointer
+	; we copy the number of flights from the pointer
 	mov r8d, dword [rdx]
-	;we initialize the valid flights contor with 0
+	; we initialize the valid flights contor with 0
 	mov r9d, 0
-	;we save the pointer to nrFlights
+	; we save the pointer to nrFlights
 	mov r11, rdx
+
 filter_loop:
-	;we check if there are 0 flights left to process
+	; we check if there are 0 flights left to process
 	cmp r8d, 0
 	je end_filter
-	;we extract the bag weight from the current flight (offset 38)
+	; 38 is the offset for the bag_weight variable
 	movzx r10d, word [rdi + 38]
+	; we compare the current weight with the minimum weight
 	cmp r10d, ecx
-	jl skip_flight
-	;we copy the first 8 bytes (destination string start)
-	mov rax, [rdi]
-	mov [rsi], rax
-	;we copy the next 8 bytes (offset 8)
-	mov rax, [rdi + 8]
-	;we move them to the final array (offset 8)
-	mov [rsi + 8], rax
-	;we copy the next 8 bytes (offset 16)
-	mov rax, [rdi + 16]
-	;we move them to the final array (offset 16)
-	mov [rsi + 16], rax
-	;we copy the next 8 bytes (offset 24)
-	mov rax, [rdi + 24]
-	;we move them to the final array (offset 24)
-	mov [rsi + 24], rax
-	;we copy the next 8 bytes (offset 32)
-	mov rax, [rdi + 32]
-	;we move them to the final array (offset 32)
-	mov [rsi + 32], rax
-	;we move the last 2 bytes (offset 40)
-	mov ax, [rdi + 40]
-	;we move them to the final array (offset 40)
-	mov [rsi + 40], ax
+	jge copy_valid_flight
+	jmp advance_source
+
+copy_valid_flight:
+	; we copy the first 8 bytes (destination string start)
+	mov r12, [rdi]
+	mov [rsi], r12
+	; we copy the next 8 bytes (offset 8)
+	mov r12, [rdi + 8]
+	; we move them to the final array (offset 8)
+	mov [rsi + 8], r12
+	; we copy the next 8 bytes (offset 16)
+	mov r12, [rdi + 16]
+	; we move them to the final array (offset 16)
+	mov [rsi + 16], r12
+	; we copy the next 8 bytes (offset 24)
+	mov r12, [rdi + 24]
+	; we move them to the final array (offset 24)
+	mov [rsi + 24], r12
+	; we copy the next 8 bytes (offset 32)
+	mov r12, [rdi + 32]
+	; we move them to the final array (offset 32)
+	mov [rsi + 32], r12
+	; we move the last 2 bytes (offset 40)
+	mov bx, [rdi + 40]
+	; we move them to the final array (offset 40)
+	mov [rsi + 40], bx
 	inc r9d
-	;we advance the final array pointer by 42 bytes (flight size)
+	; 42 is the size in bytes of a flight
 	add rsi, 42
-skip_flight:
-	;we advance the original array pointer by 42 bytes (flight size)
+
+advance_source:
+	; 42 is the size in bytes of a flight
 	add rdi, 42
 	dec r8d
-	jnz filter_loop
+	jmp filter_loop
+
 end_filter:
 	mov dword [r11], r9d
 	;; Your code ends here
