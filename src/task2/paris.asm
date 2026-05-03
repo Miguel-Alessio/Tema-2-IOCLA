@@ -19,7 +19,6 @@ solve_labyrinth:
     mov     rbx, r8
     ;; DO NOT MODIFY
     ;; YOUR CODE STARTS HERE
-    
     ;r10 si r11 sunt coordonatele actuale
     ;rdi si rsi sunt coordonatele la pasul anterior
 
@@ -45,7 +44,6 @@ start_maze:
     je win
     cmp r11, r15
     je win
-    
 check_right:
     cmp r11, r15
     je check_down

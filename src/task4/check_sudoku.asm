@@ -209,7 +209,118 @@ check_box:
 	push r15
 	;; DO NOT MODIFY
 	;; Your code starts here
+	;n*(n+1)/2
+calcul_sum_box:
+	;we use r15 to copy the size of the array
+	mov r15, rsi
+	;increase by one (n+1)
+	inc r15
+	;needed for multiplication
+	mov rax, rsi
+	;(n+1)*n
+	mul r15
+	;shift one bit to the right so we divide by 2, (n+1)*n/2
+	shr rax, 1
+	;we save the sum in r15
+	mov r15, rax
 
+	mov rbx, 1;contor
+	mov r14, 1
+calculation_factorial_box:
+	cmp rbx, rsi
+	je finish_factorial
+	inc rbx
+	mov rax, r14
+	mul rbx
+	mov r14, rax
+	jmp calculation_factorial
+
+finish_factorial_box:
+	;we initialize the current sum with 0
+	mov r12, 0
+	;we initialize the current product with 1
+	mov r13, 1
+	;we initialize the contor to 0
+	mov rcx, 0
+	;we get the address of the row
+	mov r10, [rdi + rdx * 8]
+
+; int check_box(int **array, int size, int boxNr)
+; rdi = int **array
+; rsi = int size
+; rdx = int boxNr
+
+cmp rsi,4
+je dim_4
+cmp rsi,9
+je dim_9
+cmp rsi,16
+je dim_16
+dim_4:
+	mov r11,2
+	jmp start_box
+dim_9:
+	mov r11,3
+	jmp start_box
+dim_16:
+	mov r11,4
+start_box:
+	mov rax,rdx
+	;we put 0 everywhere
+	xor rdx,rdx
+	;rax=boxNr/sqrt and rdx=the rest of the division
+	div r11
+	;we use r8
+	mov r8,rax
+	;we multiply to get the index of the first row
+	imul r8,r11
+	;we use r9
+	mov r9,rdx
+	;we multiply to get the index of the first row
+	imul r9,r11
+	;current sum
+	mov r12,0
+	;current product
+	mov r13,1
+	;contor set to 0
+	mov rbx,0
+		
+ext_loop:
+	cmp rbx,r11
+	je verify
+	mov rcx,0
+inner_loop:
+	cmp rcx,r11
+	je next_row_box
+	;r10=start rowNr
+	mov r10,r8
+	;index row
+	add r10,rbx
+	;r10=address of the row
+	mov r10,[rdi+r10*8]
+	;start of the column
+	mov rax,r9
+	;index of the column
+	add rax,rcx
+	;extracting the value
+	mov eax,dword[r10+rax*4]
+	;update the sum and the product
+	add r12,rax
+	imul r13,rax
+	;next column
+	inc rcx
+	jmp inner_loop
+next_row_box:
+	;next row
+	inc rbx
+	jmp ext_loop
+verify:
+	cmp r12,r15
+	jne not_valid_box
+	cmp r14,r13
+	jne not_valid_box
+not_valid_box:
+	mov rax,0
 	;; Your code ends here
 	;; DO NOT MODIFY
 	pop r15
