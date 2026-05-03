@@ -35,7 +35,9 @@ calcul_sum:
 	;we save the sum in r15
 	mov r15, rax
 
-	mov rbx, 1;contor
+	;we initialize the contor to 1
+	mov rbx, 1
+	;we initialize the factorial to 1
 	mov r14, 1
 calculation_factorial:
 	cmp rbx, rsi
@@ -51,7 +53,7 @@ finish_factorial:
 	mov r12, 0
 	;we initialize the current product with 1
 	mov r13, 1
-	;we initialize the contor to 0
+	;we initialize the column contor with 0
 	mov rcx, 0
 	;we get the address of the row
 	mov r10, [rdi + rdx * 8]
@@ -74,26 +76,15 @@ finish_sum_factorial:
 	jne not_valid
 	cmp r13, r14
 	jne not_valid
+	;we return 1 for success
 	mov rax, 1
-	jmp end_check_col
+	jmp end_check_row
 
 not_valid:
+	;we return 0 for failure
 	mov rax, 0
 
-end_check_col:
-	;; Your code ends here
-	;; DO NOT MODIFY
-	pop r15
-	pop r14
-	pop r13
-	pop r12
-	pop rbx
-	pop rbp
-	ret
-	;; DO NOT MODIFY
-
-
-
+end_check_row:
 	;; Your code ends here
 	;; DO NOT MODIFY
 	pop r15
@@ -136,7 +127,9 @@ calcul_sum_col:
 	;we save the sum in r15
 	mov r15, rax
 
-	mov rbx, 1;contor
+	;we initialize the contor to 1
+	mov rbx, 1
+	;we initialize the factorial to 1
 	mov r14, 1
 calculation_factorial_col:
 	cmp rbx, rsi
@@ -152,37 +145,37 @@ finish_factorial_col:
 	mov r12, 0
 	;we initialize the current product with 1
 	mov r13, 1
-	;we initialize the contor to 0
+	;we initialize the row contor with 0
 	mov rcx, 0
-	;we get the address of the row
-	mov r10, [rdi + rdx * 8]
 
 check_loop_col:
 	cmp rcx, rsi
 	je finish_sum_factorial_col
 	;we get the address of the current row
-	mov r10,[rdi+rcx*8]
+	mov r10, [rdi + rcx * 8]
 	;we get the element from the fixed column
-	mov eax,dword[r10+rdx*4]
+	mov eax, dword [r10 + rdx * 4]
 	;we add to the current sum
-	add r12,rax
+	add r12, rax
 	;we multiply to the current product
-	imul r13,rax
+	imul r13, rax
 	inc rcx
 	jmp check_loop_col
 
 finish_sum_factorial_col:
 	;we check if sum and product are correct
 	cmp r12, r15
-	jne not_valid
+	jne not_valid_col
 	cmp r13, r14
 	jne not_valid_col
+	;we return 1 for success
 	mov rax, 1
-	jmp end_check
+	jmp end_check_col
 
 not_valid_col:
+	;we return 0 for failure
 	mov rax, 0
-end_check:
+end_check_col:
 	;; Your code ends here
 	;; DO NOT MODIFY
 	pop r15
@@ -209,6 +202,7 @@ check_box:
 	push r15
 	;; DO NOT MODIFY
 	;; Your code starts here
+
 	;n*(n+1)/2
 calcul_sum_box:
 	;we use r15 to copy the size of the array
@@ -224,89 +218,84 @@ calcul_sum_box:
 	;we save the sum in r15
 	mov r15, rax
 
-	mov rbx, 1;contor
+	;we initialize the contor to 1
+	mov rbx, 1
+	;we initialize the factorial to 1
 	mov r14, 1
 calculation_factorial_box:
 	cmp rbx, rsi
-	je finish_factorial
+	je finish_factorial_box
 	inc rbx
 	mov rax, r14
 	mul rbx
 	mov r14, rax
-	jmp calculation_factorial
+	jmp calculation_factorial_box
 
 finish_factorial_box:
-	;we initialize the current sum with 0
-	mov r12, 0
-	;we initialize the current product with 1
-	mov r13, 1
-	;we initialize the contor to 0
-	mov rcx, 0
-	;we get the address of the row
-	mov r10, [rdi + rdx * 8]
-
-; int check_box(int **array, int size, int boxNr)
-; rdi = int **array
-; rsi = int size
-; rdx = int boxNr
-
-cmp rsi,4
-je dim_4
-cmp rsi,9
-je dim_9
-cmp rsi,16
-je dim_16
+	;we check if the size is 4
+	cmp rsi, 4
+	je dim_4
+	;we check if the size is 9
+	cmp rsi, 9
+	je dim_9
+	;we check if the size is 16
+	cmp rsi, 16
+	je dim_16
 dim_4:
-	mov r11,2
+	;we set the square root of 4
+	mov r11, 2
 	jmp start_box
 dim_9:
-	mov r11,3
+	;we set the square root of 9
+	mov r11, 3
 	jmp start_box
 dim_16:
-	mov r11,4
+	;we set the square root of 16
+	mov r11, 4
+
 start_box:
-	mov rax,rdx
-	;we put 0 everywhere
-	xor rdx,rdx
+	mov rax, rdx
+	;we put 0 everywhere to clear the register for division
+	xor rdx, rdx
 	;rax=boxNr/sqrt and rdx=the rest of the division
 	div r11
-	;we use r8
-	mov r8,rax
+	;we save the row index of the box
+	mov r8, rax
 	;we multiply to get the index of the first row
-	imul r8,r11
-	;we use r9
-	mov r9,rdx
-	;we multiply to get the index of the first row
-	imul r9,r11
-	;current sum
-	mov r12,0
-	;current product
-	mov r13,1
-	;contor set to 0
-	mov rbx,0
-		
+	imul r8, r11
+	;we save the column index of the box
+	mov r9, rdx
+	;we multiply to get the index of the first column
+	imul r9, r11
+	;we initialize the current sum to 0
+	mov r12, 0
+	;we initialize the current product to 1
+	mov r13, 1
+	;we set the row loop contor to 0
+	mov rbx, 0
 ext_loop:
-	cmp rbx,r11
-	je verify
-	mov rcx,0
+	cmp rbx, r11
+	je verify_box
+	;we reset the inner loop contor to 0
+	mov rcx, 0
 inner_loop:
-	cmp rcx,r11
+	cmp rcx, r11
 	je next_row_box
 	;r10=start rowNr
-	mov r10,r8
+	mov r10, r8
 	;index row
-	add r10,rbx
+	add r10, rbx
 	;r10=address of the row
-	mov r10,[rdi+r10*8]
+	mov r10, [rdi + r10 * 8]
 	;start of the column
-	mov rax,r9
+	mov rax, r9
 	;index of the column
-	add rax,rcx
+	add rax, rcx
 	;extracting the value
-	mov eax,dword[r10+rax*4]
+	mov eax, dword [r10 + rax * 4]
 	;update the sum and the product
-	add r12,rax
-	imul r13,rax
+	add r12, rax
+	imul r13, rax
 	;next column
 	inc rcx
 	jmp inner_loop
@@ -314,13 +303,21 @@ next_row_box:
 	;next row
 	inc rbx
 	jmp ext_loop
-verify:
-	cmp r12,r15
+
+verify_box:
+	cmp r12, r15
 	jne not_valid_box
-	cmp r14,r13
+	cmp r13, r14
 	jne not_valid_box
+	;we return 1 for success
+	mov rax, 1
+	jmp finish_box
+
 not_valid_box:
-	mov rax,0
+	;we return 0 for failure
+	mov rax, 0
+
+finish_box:
 	;; Your code ends here
 	;; DO NOT MODIFY
 	pop r15
